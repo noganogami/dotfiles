@@ -17,6 +17,7 @@ call dein#add('$HOME/.cache/dein/repos/github.com/Shougo/dein.vim')
 "call dein#add('Shougo/neosnippet.vim')
 "call dein#add('Shougo/neosnippet-snippets')
 call dein#add('tpope/vim-surround')
+call dein#add('tpope/vim-repeat')
 
 call dein#add('previm/previm')
 
@@ -27,6 +28,10 @@ call dein#add('prabirshrestha/asyncomplete-lsp.vim')
 
 call dein#add('rhysd/vim-clang-format')
 call dein#add('kana/vim-operator-user')
+
+call dein#add('nvie/vim-flake8')
+
+call dein#add('maxmellon/vim-jsx-pretty')
 
 " Required:
 call dein#end()
@@ -41,6 +46,9 @@ if dein#check_install()
 endif
 
 "End dein Scripts-------------------------
+
+
+let g:lsp_settings_filetype_typescript = ['typescript-language-server', 'eslint-language-server', 'deno']
 
 
 "previm settings-------------------------
@@ -62,9 +70,47 @@ set completeopt=menuone,noinsert,noselect,preview
 "-------------------------
 
 
-"clang-format-------------------------
+"format-------------------------
 autocmd FileType c,cpp ClangFormatAutoEnable
+
+function! Preserve(command)
+    " Save the last search.
+    let search = @/
+    " Save the current cursor position.
+    let cursor_position = getpos('.')
+    " Save the current window position.
+    normal! H
+    let window_position = getpos('.')
+    call setpos('.', cursor_position)
+    " Execute the command.
+    execute a:command
+    " Restore the last search.
+    let @/ = search
+    " Restore the previous window position.
+    call setpos('.', window_position)
+    normal! zt
+    " Restore the previous cursor position.
+    call setpos('.', cursor_position)
+endfunction
+
+function! Autopep8()
+    "--ignote=E501: Ignore completing the length of a line."
+    call Preserve(':silent %!autopep8 --ignore=E501 -')
+endfunction
+
+function! Pretty_jsx()
+    call Preserve(':normal ggVG=')
+endfunction
+
+augroup auto_format
+  autocmd!
+  autocmd BufWrite *.py :call Autopep8()
+  autocmd BufWrite *.py :call Flake8()
+  autocmd BufWrite *.js,*.jsx :call Pretty_jsx()
+augroup END
+
 "-------------------------
+
 
 set autoindent
 
@@ -93,12 +139,19 @@ set smartcase
 hi Search ctermbg=Cyan
 hi Search ctermfg=White
 
+nnoremap <C-l> gt
+nnoremap <C-h> gT
+
+nnoremap j gj
+nnoremap k gk
+
 "inoremap <silent> jj <ESC>
+inoremap <C-a> <Home>
 inoremap <C-e> <End>
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
 
-"inoremap {<Enter> {<CR>}<Left><CR><Up><C-t>
+inoremap {<Enter> {<CR>}<Left><CR><Up><C-t>
 "inoremap :<Enter> :<CR><Tab>
 "inoremap (<Enter> (<CR>)<Left><CR><Up><C-t>
 "inoremap ( ()<Left>
@@ -108,3 +161,6 @@ inoremap <C-b> <Left>
 "inoremap { {}<Left>
 
 "cnoremap py !python %
+
+"repeat.vim 
+silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
