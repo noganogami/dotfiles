@@ -3,15 +3,15 @@
 ディレクトリの作成
 
 ```
-        mkdir -p  ~/.cache/dein
-        cd ~/.cache/dein
+mkdir -p  ~/.cache/dein
+cd ~/.cache/dein
 ```
 
 deinのインストール
 
 ```
-        curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-        sh ./installer.sh ~/.cache/dein
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+sh ./installer.sh ~/.cache/dein
 ```
 
 # リポジトリのクローン
@@ -19,13 +19,13 @@ deinのインストール
 リポジトリのクローン
 
 ```
-        git clone git@github.com:noganogami/dotfiles.git
+git clone git@github.com:noganogami/dotfiles.git
 ```
 
 .vimrcのシンボリックリンクの作成
 
 ```
-        ln -s ~/dotfiles/.vimrc ~/.vimrc
+./make_link.sh
 ```
 
 # プラグインの設定
@@ -33,5 +33,5 @@ deinのインストール
 previmの設定
 
 ```
-        let g:previm_open_cmd= 'ブラウザを開くコマンド'
+let g:previm_open_cmd= 'ブラウザを開くコマンド'
 ```

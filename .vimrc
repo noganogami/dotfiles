@@ -52,8 +52,14 @@ let g:lsp_settings_filetype_typescript = ['typescript-language-server', 'eslint-
 
 
 "previm settings-------------------------
-let g:previm_open_cmd = '/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
-let g:previm_wsl_mode = 1
+if system('uname') =~ 'Darwin'
+    "mac
+    let g:previm_open_cmd = 'open -a Google\ Chrome'
+elseif isdirectory('/mnt/c')
+    "wsl
+    let g:previm_open_cmd = '/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
+    let g:previm_wsl_mode = 1
+endif 
 "-------------------------
 
 
@@ -144,6 +150,9 @@ nnoremap <C-h> gT
 
 nnoremap j gj
 nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+
 
 "inoremap <silent> jj <ESC>
 inoremap <C-a> <Home>
