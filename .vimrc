@@ -129,7 +129,7 @@ set confirm
 set clipboard=unnamed
 
 set tabstop=4
-set shiftwidth=3
+set shiftwidth=4
 set expandtab
 
 set wildmenu
