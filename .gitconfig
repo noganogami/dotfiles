@@ -2,6 +2,6 @@
 	name = noganogami
 	email = hydetkc7@gmail.com
 [core]
-	excludensfile = /Users/nogamitakafumi/.gitignore_global
+	excludensfile = $HOME/.gitignore_global
 [init]
 	defaultBranch = main
