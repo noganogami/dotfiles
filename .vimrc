@@ -160,6 +160,11 @@ inoremap <C-e> <End>
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
 
+cnoremap <C-a> <Home>
+cnoremap <C-f> <Right>
+cnoremap <C-b> <Left>
+cnoremap <C-u> <C-e><C-u>
+
 inoremap {<Enter> {<CR>}<Left><CR><Up><C-t>
 "inoremap :<Enter> :<CR><Tab>
 "inoremap (<Enter> (<CR>)<Left><CR><Up><C-t>
