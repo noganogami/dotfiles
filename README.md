@@ -1,19 +1,3 @@
-## deinのインストール
-
-ディレクトリの作成
-
-```
-mkdir -p  ~/.cache/dein
-cd ~/.cache/dein
-```
-
-[ dein ](https://github.com/Shougo/dein.vim)のインストール
-
-```
-curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-sh ./installer.sh ~/.cache/dein
-```
-
 ## リポジトリのクローン
 
 リポジトリのクローン
@@ -27,3 +11,13 @@ git clone git@github.com:noganogami/dotfiles.git
 ```
 ./make_link.sh
 ```
+## vim-lspのプラグインをインストール
+
+py-lspのプラグインをインストール
+
+```
+cd ~/.local/share/vim-lsp-settings/servers/pylsp-all/
+source ./venv/bin/activate
+pip install pyls-isort python-lsp-black pylsp-mypy
+```
+
