@@ -1,6 +1,6 @@
 #!/bin/bash
 
-files=(".vimrc" ".tmux.conf" ".config/git")
+files=(".vimrc" ".tmux.conf" ".config/git" ".vim")
 for file in "${files[@]}"
 do
    if [ ! -e ~/$file ];then
