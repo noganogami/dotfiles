@@ -1,8 +1,45 @@
 [[plugins]]
+repo = 'jonathanfilip/vim-lucius'
+hook_add = '''
+  let g:lucius_style = 'dark'
+  let g:lucius_contrast = 'low'
+  let g:lucius_contrast_bg = 'high'
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+hook_add = '''
+  let g:airline_theme = 'lucius'
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#formatter = 'unique_tail'
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+
+[[plugins]]
+repo = 'edkolev/tmuxline.vim'
+hook_add = '''
+  let g:tmuxline_theme = 'lucius'
+  let g:airline#extensions#tmuxline#enabled = 1
+'''
+[[plugins]]
+repo = 'preservim/nerdtree'
+hook_add = '''
+  nnoremap <C-n> :NERDTreeToggle<CR>
+'''
+
+[[plugins]]
 repo = 'tpope/vim-surround'
 
 [[plugins]]
 repo = 'tpope/vim-repeat'
+
+[[plugins]]
+repo = 'tpope/vim-speeddating'
+
+[[plugins]]
+repo = 'tpope/vim-commentary'
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'

@@ -40,5 +40,18 @@ on_ft = ['c', 'cpp', 'javascript', 'typescript']
 
 [[plugins]]
 repo = 'maxmellon/vim-jsx-pretty'
-on_ft = ['javascript.jsx']
+on_ft = ['javascriptreact']
+hook_source = '''autocmd BufWrite *.jsx :call preserve#Preserve(':normal ggVG=')'''
+
+
+
+
+
+
+
+
+
+
+
+
 

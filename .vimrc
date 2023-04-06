@@ -34,6 +34,7 @@ endif
 
 filetype plugin indent on
 syntax enable
+colorscheme lucius
 
 " automatically install not installed plugins.
 if dein#check_install()
@@ -41,34 +42,12 @@ if dein#check_install()
 endif
 
 "End dein Scripts-------------------------
- 
-function! Preserve(command)
-    " save the last search and the window position
-    let l:search = getreg('/')
-    let l:view = winsaveview()
-    " execute the command
-    execute a:command
-    " restore the seach and the position
-    call winrestview(l:view)
-    call setreg('/', l:search)
-endfunction
-
-function! Pretty_jsx()
-    call Preserve(':normal ggVG=')
-endfunction
-
-autocmd BufWrite *.jsx :call Pretty_jsx()
-
 
 set autoindent
-
 set number
-
-syntax on
-
 set confirm
-
 set clipboard=unnamed
+set cursorline
 
 set tabstop=4
 set shiftwidth=2
@@ -83,8 +62,8 @@ set listchars=tab:>-
 set hlsearch
 set ignorecase
 set smartcase
-hi Search ctermbg=Cyan
-hi Search ctermfg=White
+"hi Search ctermbg=Cyan
+"hi Search ctermfg=White
 
 nnoremap <C-l> gt
 nnoremap <C-h> gT
@@ -93,7 +72,6 @@ nnoremap j gj
 nnoremap k gk
 vnoremap j gj
 vnoremap k gk
-
 
 inoremap <C-a> <Home>
 inoremap <C-e> <End>
