@@ -48,6 +48,7 @@ hook_add = '''autocmd BufWritePre *.py execute('LspDocumentFormatSync')'''
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
 hook_add = '''
+  let g:lsp_diagnostics_echo_cursor = 1
   let g:lsp_settings_filetype_typescript = ['typescript-language-server', 'eslint-language-server', 'deno']
   let g:lsp_settings = {
   \  'pylsp-all': {
@@ -63,7 +64,8 @@ hook_add = '''
   \            'preview': 0
   \          },
   \          'flake8': {
-  \            'enabled': 1
+  \            'enabled': 1,
+  \            'maxLineLength': 88
   \          },
   \          'mccabe': {
   \            'enabled': 0
