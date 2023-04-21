@@ -62,8 +62,6 @@ set listchars=tab:>-
 set hlsearch
 set ignorecase
 set smartcase
-"hi Search ctermbg=Cyan
-"hi Search ctermfg=White
 
 nnoremap <C-l> gt
 nnoremap <C-h> gT

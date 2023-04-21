@@ -1,4 +1,38 @@
 [[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+on_event = 'BufEnter'
+hook_post_source = '''
+  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+
+  " allow modifying the completeopt variable, or it will
+  " be overridden all the time
+  let g:asyncomplete_auto_completeopt = 0
+
+  set completeopt=menuone,noinsert,noselect,preview
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+on_event = 'BufEnter'
+depends = ['asyncomplete.vim']
+
+[[plugins]]
+repo = 'rhysd/vim-clang-format'
+on_ft = ['c', 'cpp', 'javascript', 'typescript']
+hook_source = '''ClangFormatAutoEnable'''
+
+[[plugins]]
+repo = 'kana/vim-operator-user'
+on_ft = ['c', 'cpp', 'javascript', 'typescript']
+
+[[plugins]]
+repo = 'maxmellon/vim-jsx-pretty'
+on_ft = ['javascriptreact']
+hook_source = '''autocmd BufWrite *.jsx :call preserve#Preserve(':normal ggVG=')'''
+
+[[plugins]]
 repo = 'previm/previm'
 on_ft = ['markdown']
 hook_source = '''
@@ -63,49 +97,3 @@ hook_source = '''
   \  },
   \]
 '''
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete.vim'
-on_event = "InsertEnter"
-hook_post_source = '''
-  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-  inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
-
-  " allow modifying the completeopt variable, or it will
-  " be overridden all the time
-  let g:asyncomplete_auto_completeopt = 0
-
-  set completeopt=menuone,noinsert,noselect,preview
-'''
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-lsp.vim'
-on_event = "InsertEnter"
-
-[[plugins]]
-repo = 'rhysd/vim-clang-format'
-on_ft = ['c', 'cpp', 'javascript', 'typescript']
-hook_source = '''ClangFormatAutoEnable'''
-
-[[plugins]]
-repo = 'kana/vim-operator-user'
-on_ft = ['c', 'cpp', 'javascript', 'typescript']
-
-[[plugins]]
-repo = 'maxmellon/vim-jsx-pretty'
-on_ft = ['javascriptreact']
-hook_source = '''autocmd BufWrite *.jsx :call preserve#Preserve(':normal ggVG=')'''
-
-
-
-
-
-
-
-
-
-
-
-
-
