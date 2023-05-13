@@ -42,6 +42,9 @@ repo = 'tpope/vim-speeddating'
 repo = 'tpope/vim-commentary'
 
 [[plugins]]
+repo = 'kana/vim-fakeclip'
+
+[[plugins]]
 repo = 'prabirshrestha/vim-lsp'
 hook_add = '''autocmd BufWritePre *.py execute('LspDocumentFormatSync')'''
 

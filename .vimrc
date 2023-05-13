@@ -46,7 +46,7 @@ endif
 set autoindent
 set number
 set confirm
-set clipboard=unnamedplus
+set clipboard=unnamed
 set cursorline
 
 set tabstop=4
