@@ -45,6 +45,9 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'kana/vim-fakeclip'
+
+[[plugins]]
 repo = 'vim-denops/denops.vim'
 
 [[plugins]]

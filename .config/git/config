@@ -3,3 +3,5 @@
 	email = hydetkc7@gmail.com
 [init]
 	defaultBranch = main
+[core]
+	editor = vim

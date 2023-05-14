@@ -50,6 +50,7 @@ call dein#recache_runtimepath()
 set autoindent
 set number
 set confirm
+set clipboard=unnamed
 set cursorline
 
 set tabstop=4
