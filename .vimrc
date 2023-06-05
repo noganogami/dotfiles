@@ -41,10 +41,6 @@ if dein#check_install()
   call dein#install()
 endif
 
-" automatically uninstall non-used plugins.
-call map(dein#check_clean(), { _, val -> delete(val, 'rf') })
-call dein#recache_runtimepath()
-
 "End dein Scripts-------------------------
 
 set autoindent
