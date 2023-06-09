@@ -147,6 +147,12 @@ hook_add = '''
     \  "<Cmd>call ddu#ui#filer#do_action('itemAction', {'params': {'command': 'split'}})<CR>"
     nnoremap <buffer><silent><expr> v
     \  "<Cmd>call ddu#ui#filer#do_action('itemAction', {'params': {'command': 'vsplit'}})<CR>"
+    nnoremap <buffer><silent> n
+    \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'newFile'})<CR>
+    nnoremap <buffer><silent> d
+    \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'delete'})<CR>
+    nnoremap <buffer><silent> r
+    \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'rename'})<CR>
     nnoremap <buffer><silent> ..
     \  <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'narrow', 'params': {'path': '..'}})<CR>
     nnoremap <buffer><silent> >
@@ -180,7 +186,7 @@ hook_add = '''
   \  <Cmd>call ddu#start({
   \     'uiParams': {
   \       'ff': {
-  \         'startFilter': v:true
+  \         'startFilter': v:false
   \       }
   \     },
   \     'sources': [{'name': 'file_rec'}],
@@ -228,7 +234,12 @@ repo = 'Shougo/ddu-kind-word'
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
-hook_add = '''autocmd BufWritePre *.py execute('LspDocumentFormatSync')'''
+hook_add = '''
+  autocmd BufWritePre *.py execute('LspDocumentFormatSync')
+  autocmd BufWritePre *.go execute('LspCodeActionSync source.organizeImports')
+  nnoremap <silent> gd :LspDefinition<CR>
+  vnoremap <silent> f :LspDocumentRangeFormat<CR>
+  '''
 
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
