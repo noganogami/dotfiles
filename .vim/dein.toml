@@ -235,10 +235,10 @@ repo = 'Shougo/ddu-kind-word'
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
 hook_add = '''
-  autocmd BufWritePre *.py execute('LspDocumentFormatSync')
+  autocmd BufWritePre *.py,*.go execute('LspDocumentFormatSync')
   autocmd BufWritePre *.go execute('LspCodeActionSync source.organizeImports')
   nnoremap <silent> gd :LspDefinition<CR>
-  vnoremap <silent> f :LspDocumentRangeFormat<CR>
+  nnoremap <silent> gi :LspImplementation<CR>
   '''
 
 [[plugins]]
