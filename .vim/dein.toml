@@ -149,6 +149,8 @@ hook_add = '''
     \  "<Cmd>call ddu#ui#filer#do_action('itemAction', {'params': {'command': 'vsplit'}})<CR>"
     nnoremap <buffer><silent> n
     \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'newFile'})<CR>
+    nnoremap <buffer><silent> m
+    \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'newDirectory'})<CR>
     nnoremap <buffer><silent> d
     \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'delete'})<CR>
     nnoremap <buffer><silent> r
