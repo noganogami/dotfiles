@@ -41,10 +41,6 @@ if dein#check_install()
   call dein#install()
 endif
 
-" automatically uninstall non-used plugins.
-call map(dein#check_clean(), { _, val -> delete(val, 'rf') })
-call dein#recache_runtimepath()
-
 "End dein Scripts-------------------------
 
 set autoindent
@@ -54,7 +50,7 @@ set clipboard=unnamed
 set cursorline
 
 set tabstop=4
-set shiftwidth=2
+set shiftwidth=4
 set expandtab
 
 set wildmenu
@@ -87,3 +83,5 @@ cnoremap <C-a> <Home>
 cnoremap <C-u> <C-e><C-u>
 cnoremap <C-b> <Space><BS><Left>
 cnoremap <C-f> <Space><BS><Right>
+
+autocmd TextYankPost * :call yankukku#Yank()
