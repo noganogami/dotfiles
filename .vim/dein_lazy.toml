@@ -18,19 +18,19 @@ repo = 'prabirshrestha/asyncomplete-lsp.vim'
 on_event = 'BufEnter'
 depends = ['asyncomplete.vim']
 
-[[plugins]]
-repo = 'rhysd/vim-clang-format'
-on_ft = ['c', 'cpp', 'javascript', 'typescript']
-hook_source = '''ClangFormatAutoEnable'''
+# [[plugins]]
+# repo = 'rhysd/vim-clang-format'
+# on_ft = ['c', 'cpp', 'javascript', 'typescript']
+# hook_source = '''ClangFormatAutoEnable'''
 
-[[plugins]]
-repo = 'kana/vim-operator-user'
-on_ft = ['c', 'cpp', 'javascript', 'typescript']
+# [[plugins]]
+# repo = 'kana/vim-operator-user'
+# on_ft = ['c', 'cpp', 'javascript', 'typescript']
 
-[[plugins]]
-repo = 'maxmellon/vim-jsx-pretty'
-on_ft = ['javascriptreact']
-hook_source = '''autocmd BufWrite *.jsx :call preserve#Preserve(':normal ggVG=')'''
+# [[plugins]]
+# repo = 'maxmellon/vim-jsx-pretty'
+# on_ft = ['javascriptreact']
+# hook_source = '''autocmd BufWrite *.jsx :call preserve#Preserve(':normal ggVG=')'''
 
 [[plugins]]
 repo = 'previm/previm'

@@ -199,9 +199,14 @@ hook_add = '''
   nnoremap <silent> ;b 
   \  <Cmd>call ddu#start({'sources': [{'name': 'buffer'}]})<CR>
   nnoremap <silent> ;r 
-  \  <Cmd>call ddu#start({'sources': [{'name': 'register'}]})<CR>
-  vnoremap <silent> ;r 
-  \  <Cmd>call ddu#start({'sources': [{'name': 'register'}]})<CR>
+  \  <Cmd>call ddu#start({
+  \     'sources': [{'name': 'register'}],
+  \     'sourceOptions': {
+  \       '_': {
+  \         'converters': ['filter_prefix'],
+  \       },
+  \     },
+  \   })<CR>
   nnoremap <silent> ;m 
   \  <Cmd>call ddu#start({'sources': [{'name': 'mr'}]})<CR>
   nnoremap <silent> ;t
@@ -239,6 +244,9 @@ repo = 'Shougo/ddu-filter-matcher_substring'
 repo = 'Shougo/ddu-filter-matcher_hidden'
 
 [[plugins]]
+repo = 'Shougo/ddu-filter-sorter_alpha'
+
+[[plugins]]
 repo = 'Shougo/ddu-kind-file'
 
 [[plugins]]
@@ -248,6 +256,7 @@ repo = 'Shougo/ddu-kind-word'
 repo = 'prabirshrestha/vim-lsp'
 hook_add = '''
   autocmd BufWritePre *.py,*.go execute('LspDocumentFormatSync')
+  autocmd BufWritePre *.ts,*.tsx execute('LspDocumentFormatSync --server=efm-langserver')
   autocmd BufWritePre *.go execute('LspCodeActionSync source.organizeImports')
   nnoremap <silent> gd :LspDefinition<CR>
   nnoremap <silent> gi :LspImplementation<CR>
@@ -257,7 +266,6 @@ hook_add = '''
 repo = 'mattn/vim-lsp-settings'
 hook_add = '''
   let g:lsp_diagnostics_echo_cursor = 1
-  let g:lsp_settings_filetype_typescript = ['typescript-language-server', 'eslint-language-server', 'deno']
   let g:lsp_settings = {
   \  'pylsp-all': {
   \    'workspace_config': {
@@ -296,7 +304,10 @@ hook_add = '''
   \        }
   \      }
   \    }
-  \  }
+  \  },
+  \  'efm-langserver': {
+  \   'disabled': v:false
+  \  },
   \}
 
 '''
