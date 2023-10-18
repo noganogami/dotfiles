@@ -4,7 +4,7 @@ if [ ! -d "~/.config" ]; then
   mkdir ~/.config
 fi
 
-files=(".vimrc" ".tmux.conf" ".config/git" ".vim")
+files=(".vimrc" ".tmux.conf" ".config/git" ".config/efm-langserver" ".vim")
 for file in "${files[@]}"
 do
    if [ ! -e ~/$file ];then
