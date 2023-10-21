@@ -13,8 +13,8 @@ export class Filter extends BaseFilter<Params> {
   }): Promise<DduItem[]> {
     return Promise.resolve(
       args.items.filter((item) => {
-        const firstChar = item.word[0]; // 文字列の最初の文字を取得
-        return firstChar >= 'a' && firstChar <= 'z'; // アルファベットの範囲内かどうかをチェック
+        const firstChar = item.word[0];
+        return firstChar == '+' || firstChar == '*' || firstChar >= 'a' && firstChar <= 'z';
       }),
     );
   }
