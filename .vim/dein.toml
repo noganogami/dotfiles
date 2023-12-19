@@ -1,4 +1,7 @@
-  [[plugins]]
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
 repo = 'jonathanfilip/vim-lucius'
 hook_add = '''
   let g:lucius_style = 'dark'
@@ -49,12 +52,6 @@ repo = 'Yggdroot/indentLine'
 
 [[plugins]]
 repo = 'kana/vim-fakeclip'
-
-[[plugins]]
-repo = 'lambdalisue/mr.vim'
-
-[[plugins]]
-repo = 'vim-denops/denops.vim'
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'

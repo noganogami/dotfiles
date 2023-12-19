@@ -1,6 +1,6 @@
 function! s:named_register()
   let min=char2nr('a')
-  let max=char2nr('z')
+  let max=char2nr('p')
   let props= {'cur': min}
 
   function! props.shift_register_contents() closure

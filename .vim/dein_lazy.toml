@@ -1,4 +1,67 @@
 [[plugins]]
+repo = 'vim-denops/denops.vim'
+on_event = 'VimEnter'
+
+# [[plugins]]
+# repo = 'Shougo/pum.vim'
+# on_event = 'InsertEnter'
+# hook_post_source = '''
+#   inoremap <expr> <Tab>   pum#visible() ? "<Cmd>call pum#map#insert_relative(+1)<CR>" : "<Tab>"
+#   inoremap <expr> <S-Tab> pum#visible() ? "<Cmd>call pum#map#insert_relative(-1)<CR>" : "<S-Tab>"
+#   inoremap <expr> <C-n>   pum#visible() ? "<Cmd>call pum#map#insert_relative(+1)<CR>" : "<C-n>"
+#   inoremap <expr> <C-p>   pum#visible() ? "<Cmd>call pum#map#insert_relative(-1)<CR>" : "<C-p>"
+#   inoremap <expr> <CR>    pum#visible() ? "<Cmd>call pum#map#confirm()<CR>" : "<CR>"
+#   inoremap <expr> <C-e>   pum#visible() ? "<Cmd>call pum#map#cancel()<CR>" : "<C-e>"
+# '''
+
+# [[plugins]]
+# repo =  'Shougo/ddc.vim'
+# depends = ['denops.vim']
+# on_event = 'InsertEnter'
+# hook_source = '''
+#   call ddc#custom#patch_global(#{
+#       \   'ui': 'pum',
+#       \   'completionMenu': 'pum.vim'
+#       \   'sources': ['vim-lsp','around'],
+#       \   'sourceOptions': {
+#       \     '_': {
+#       \       'matchers': ['matcher_fuzzy'],
+#       \       'sorters': ['sorter_fuzzy'],
+#       \       'converters': ['converter_fuzzy'],
+#       \     },
+#       \     'vim-lsp': {
+#       \       'mark': 'LSP',
+#       \     },
+#       \     'around': {
+#       \       'mark': 'around',
+#       \     },
+#       \   },
+#       \   'filterParams': {
+#       \     'matcher_fuzzy': {
+#       \       'splitMode': 'character',
+#       \     },
+#       \   }
+#       \ })
+# '''
+
+# [[plugins]]
+# repo = 'Shougo/ddc-ui-pum'
+# depends = ['pum.vim']
+# on_source = 'ddc.vim'
+
+# [[plugins]]
+# repo = 'Shougo/ddc-source-around'
+# on_source = 'ddc.vim'
+
+# [[plugins]]
+# repo = 'Shun/ddc-source-vim-lsp'
+# on_source = 'ddc.vim'
+
+# [[plugins]]
+# repo = 'tani/ddc-fuzzy'
+# on_source = 'ddc.vim'
+
+[[plugins]]
 repo = 'prabirshrestha/asyncomplete.vim'
 on_event = 'BufEnter'
 hook_source = '''
