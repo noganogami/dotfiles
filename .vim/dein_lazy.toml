@@ -2,84 +2,105 @@
 repo = 'vim-denops/denops.vim'
 on_event = 'VimEnter'
 
-# [[plugins]]
-# repo = 'Shougo/pum.vim'
-# on_event = 'InsertEnter'
-# hook_post_source = '''
-#   inoremap <expr> <Tab>   pum#visible() ? "<Cmd>call pum#map#insert_relative(+1)<CR>" : "<Tab>"
-#   inoremap <expr> <S-Tab> pum#visible() ? "<Cmd>call pum#map#insert_relative(-1)<CR>" : "<S-Tab>"
-#   inoremap <expr> <C-n>   pum#visible() ? "<Cmd>call pum#map#insert_relative(+1)<CR>" : "<C-n>"
-#   inoremap <expr> <C-p>   pum#visible() ? "<Cmd>call pum#map#insert_relative(-1)<CR>" : "<C-p>"
-#   inoremap <expr> <CR>    pum#visible() ? "<Cmd>call pum#map#confirm()<CR>" : "<CR>"
-#   inoremap <expr> <C-e>   pum#visible() ? "<Cmd>call pum#map#cancel()<CR>" : "<C-e>"
-# '''
-
-# [[plugins]]
-# repo =  'Shougo/ddc.vim'
-# depends = ['denops.vim']
-# on_event = 'InsertEnter'
-# hook_source = '''
-#   call ddc#custom#patch_global(#{
-#       \   'ui': 'pum',
-#       \   'completionMenu': 'pum.vim'
-#       \   'sources': ['vim-lsp','around'],
-#       \   'sourceOptions': {
-#       \     '_': {
-#       \       'matchers': ['matcher_fuzzy'],
-#       \       'sorters': ['sorter_fuzzy'],
-#       \       'converters': ['converter_fuzzy'],
-#       \     },
-#       \     'vim-lsp': {
-#       \       'mark': 'LSP',
-#       \     },
-#       \     'around': {
-#       \       'mark': 'around',
-#       \     },
-#       \   },
-#       \   'filterParams': {
-#       \     'matcher_fuzzy': {
-#       \       'splitMode': 'character',
-#       \     },
-#       \   }
-#       \ })
-# '''
-
-# [[plugins]]
-# repo = 'Shougo/ddc-ui-pum'
-# depends = ['pum.vim']
-# on_source = 'ddc.vim'
-
-# [[plugins]]
-# repo = 'Shougo/ddc-source-around'
-# on_source = 'ddc.vim'
-
-# [[plugins]]
-# repo = 'Shun/ddc-source-vim-lsp'
-# on_source = 'ddc.vim'
-
-# [[plugins]]
-# repo = 'tani/ddc-fuzzy'
-# on_source = 'ddc.vim'
-
 [[plugins]]
-repo = 'prabirshrestha/asyncomplete.vim'
-on_event = 'BufEnter'
-hook_source = '''
-  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-  inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
-
-  " allow modifying the completeopt variable, or it will
-  " be overridden all the time
-  let g:asyncomplete_auto_completeopt = 0
-
-  set completeopt=menuone,noinsert,noselect,preview
+repo = 'Shougo/pum.vim'
+on_source = 'ddc.vim'
+hook_post_source = '''
+  inoremap <expr> <Tab>   pum#visible() ? "<Cmd>call pum#map#insert_relative(+1)<CR>" : "<Tab>"
+  inoremap <expr> <S-Tab> pum#visible() ? "<Cmd>call pum#map#insert_relative(-1)<CR>" : "<S-Tab>"
+  inoremap <expr> <C-n>   pum#visible() ? "<Cmd>call pum#map#insert_relative(+1)<CR>" : "<C-n>"
+  inoremap <expr> <C-p>   pum#visible() ? "<Cmd>call pum#map#insert_relative(-1)<CR>" : "<C-p>"
+  inoremap <expr> <CR>    pum#visible() ? "<Cmd>call pum#map#confirm()<CR>" : "<CR>"
+  inoremap <expr> <C-e>   pum#visible() ? "<Cmd>call pum#map#cancel()<CR>" : "<C-e>"
 '''
 
 [[plugins]]
-repo = 'prabirshrestha/asyncomplete-lsp.vim'
-on_event = 'BufEnter'
-depends = ['asyncomplete.vim']
+repo = 'matsui54/denops-popup-preview.vim'
+on_source = 'ddc.vim'
+hook_post_source = '''
+  call popup_preview#enable()
+'''
+
+[[plugins]]
+repo =  'Shougo/ddc.vim'
+depends = ['denops.vim']
+on_event = 'InsertEnter'
+hook_source = '''
+  call ddc#custom#patch_global({
+      \   'ui': 'pum',
+      \   'sources': ['vim-lsp','around'],
+      \   'sourceOptions': {
+      \     '_': {
+      \       'matchers': ['matcher_fuzzy'],
+      \       'sorters': ['sorter_fuzzy'],
+      \       'converters': ['converter_fuzzy', 'converter_remove_overlap'],
+      \       'ignoreCase': v:true,
+      \     },
+      \     'vim-lsp': {
+      \       'mark': 'LSP',
+      \       'forceCompletionPattern': '\.\w*|:\w*|->\w*',
+      \     },
+      \     'around': {
+      \       'mark': 'around',
+      \     },
+      \     'buffer': {
+      \       'mark': 'buffer',
+      \     },
+      \   },
+      \   'filterParams': {
+      \     'matcher_fuzzy': {
+      \       'splitMode': 'character',
+      \     },
+      \   },
+      \ })
+
+  call ddc#enable()
+'''
+
+[[plugins]]
+repo = 'Shougo/ddc-ui-pum'
+depends = ['pum.vim']
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-source-around'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shun/ddc-source-vim-lsp'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'tani/ddc-fuzzy'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-filter-converter_remove_overlap'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'matsui54/ddc-buffer'
+on_source = 'ddc.vim'
+
+# [[plugins]]
+# repo = 'prabirshrestha/asyncomplete.vim'
+# on_event = 'BufEnter'
+# hook_source = '''
+#   inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+#   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+#   inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+
+#   " allow modifying the completeopt variable, or it will
+#   " be overridden all the time
+#   let g:asyncomplete_auto_completeopt = 0
+
+#   set completeopt=menuone,noinsert,noselect,preview
+# '''
+
+# [[plugins]]
+# repo = 'prabirshrestha/asyncomplete-lsp.vim'
+# on_event = 'BufEnter'
+# depends = ['asyncomplete.vim']
 
 # [[plugins]]
 # repo = 'rhysd/vim-clang-format'
