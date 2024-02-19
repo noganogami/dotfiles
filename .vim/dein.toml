@@ -61,6 +61,7 @@ hook_add = '''
   autocmd BufWritePre *.go execute('LspCodeActionSync source.organizeImports')
   nnoremap <silent> gd :LspDefinition<CR>
   nnoremap <silent> gi :LspImplementation<CR>
+  nnoremap <silent> gr :LspReferences<CR>
   '''
 
 [[plugins]]
@@ -106,6 +107,9 @@ hook_add = '''
       \       }
       \     }
       \   },
+      \  'deno': {
+      \    'disabled': 1
+      \  },
       \   'efm-langserver': {
       \     'disabled': v:false
       \   },
