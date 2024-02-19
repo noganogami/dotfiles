@@ -8,6 +8,7 @@ hook_post_source = '''
       \   'sourceOptions': {
       \     '_': {
       \       'matchers': ['matcher_substring'],
+      \       'ignoreCase': v:true,
       \     },
       \   },
       \   'kindOptions': {
