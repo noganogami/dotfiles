@@ -5,6 +5,13 @@ on_source = 'denops.vim'
 hook_post_source = '''
   call ddu#custom#patch_global({
       \   'ui': 'ff',
+      \   'uiParams': {
+      \     'ff': {
+      \       'startAutoAction': v:true,
+      \       'autoAction': {'name': 'preview'},
+      \       'previewFloating': v:true,
+      \     }
+      \   },
       \   'sourceOptions': {
       \     '_': {
       \       'matchers': ['matcher_substring'],
@@ -160,6 +167,11 @@ hook_post_source = '''
       \ <Cmd>call ddu#start({'sources': [{'name': 'buffer'}]})<CR>
   nnoremap <silent> ;r 
       \ <Cmd>call ddu#start({
+      \   'uiParams': {
+      \     'ff': {
+      \       'startAutoAction': v:false,
+      \     }
+      \   },
       \   'sources': [{'name': 'register'}],
       \   'sourceOptions': {
       \     '_': {
