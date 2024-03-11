@@ -39,6 +39,9 @@ function! config#lsp_settings#init()
       \       }
       \     }
       \   },
+      \  'deno': {
+      \    'disabled': 1
+      \  },
       \   'efm-langserver': {
       \     'disabled': v:false
       \   },

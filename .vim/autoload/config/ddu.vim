@@ -51,23 +51,23 @@ endfunction
 
 function! s:ddu_ff_settings() abort
   nnoremap <buffer><silent> <CR>
-        \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
+        \ <Cmd>call ddu#ui#do_action('itemAction')<CR>
   nnoremap <buffer><silent> o
-        \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
+        \ <Cmd>call ddu#ui#do_action('itemAction')<CR>
   nnoremap <buffer><silent> p
-        \ <Cmd>call ddu#ui#ff#do_action('togglePreview')<CR>
+        \ <Cmd>call ddu#ui#do_action('togglePreview')<CR>
   nnoremap <buffer><silent> <Space>
-        \ <Cmd>call ddu#ui#ff#do_action('itemAction', {'name': 'insert'})<CR>
+        \ <Cmd>call ddu#ui#do_action('itemAction', {'name': 'insert'})<CR>
   nnoremap <buffer><silent> t
-        \ <Cmd>call ddu#ui#ff#do_action('itemAction', {'params': {'command': 'tabe'}})<CR>
+        \ <Cmd>call ddu#ui#do_action('itemAction', {'params': {'command': 'tabe'}})<CR>
   nnoremap <buffer><silent> s
-        \ <Cmd>call ddu#ui#ff#do_action('itemAction', {'params': {'command': 'split'}})<CR>
+        \ <Cmd>call ddu#ui#do_action('itemAction', {'params': {'command': 'split'}})<CR>
   nnoremap <buffer><silent> v
-        \ <Cmd>call ddu#ui#ff#do_action('itemAction', {'params': {'command': 'vsplit'}})<CR>
+        \ <Cmd>call ddu#ui#do_action('itemAction', {'params': {'command': 'vsplit'}})<CR>
   nnoremap <buffer><silent> i
-        \ <Cmd>call ddu#ui#ff#do_action('openFilterWindow')<CR>
+        \ <Cmd>call ddu#ui#do_action('openFilterWindow')<CR>
   nnoremap <buffer><silent> >
-        \ <Cmd>call ddu#ui#ff#do_action('updateOptions', {
+        \ <Cmd>call ddu#ui#do_action('updateOptions', {
         \   'sourceOptions': {
         \     '_': {
         \       'matchers': config#ddu#toggleHidden(),
@@ -75,47 +75,47 @@ function! s:ddu_ff_settings() abort
         \   },
         \ })<CR>
   nnoremap <buffer><silent> q
-        \ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
+        \ <Cmd>call ddu#ui#do_action('quit')<CR>
 endfunction
 
 function! s:ddu_filter_settings() abort
   inoremap <buffer><silent> <CR>
-        \ <Esc><Cmd>call ddu#ui#ff#do_action('closeFilterWindow')<CR>
+        \ <Esc><Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
   nnoremap <buffer><silent> <CR>
-        \ <Cmd>call ddu#ui#ff#do_action('closeFilterWindow')<CR>
+        \ <Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
   nnoremap <buffer><silent> q
-        \ <Cmd>call ddu#ui#ff#do_action('closeFilterWindow')<CR>
+        \ <Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
 endfunction
 
 function! s:ddu_filer_settings() abort
   nnoremap <buffer><silent><expr> <CR>
         \ ddu#ui#get_item()->get('isTree', v:false) ?
-        \ "<Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'narrow'})<CR>" :
-        \ "<Cmd>call ddu#ui#filer#do_action('itemAction')<CR>"
+        \ "<Cmd>call ddu#ui#do_action('itemAction', {'name': 'narrow'})<CR>" :
+        \ "<Cmd>call ddu#ui#do_action('itemAction')<CR>"
   nnoremap <buffer><silent><expr> o
         \ ddu#ui#get_item()->get('isTree', v:false) ?
-        \ "<Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'narrow'})<CR>" :
-        \ "<Cmd>call ddu#ui#filer#do_action('itemAction')<CR>"
+        \ "<Cmd>call ddu#ui#do_action('itemAction', {'name': 'narrow'})<CR>" :
+        \ "<Cmd>call ddu#ui#do_action('itemAction')<CR>"
   nnoremap <buffer><silent> p
-        \ <Cmd>call ddu#ui#ff#do_action('togglePreview')<CR>
+        \ <Cmd>call ddu#ui#do_action('togglePreview')<CR>
   nnoremap <buffer><silent><expr> t
-        \ "<Cmd>call ddu#ui#filer#do_action('itemAction', {'params': {'command': 'tabe'}})<CR>"
+        \ "<Cmd>call ddu#ui#do_action('itemAction', {'params': {'command': 'tabe'}})<CR>"
   nnoremap <buffer><silent><expr> s
-        \ "<Cmd>call ddu#ui#filer#do_action('itemAction', {'params': {'command': 'split'}})<CR>"
+        \ "<Cmd>call ddu#ui#do_action('itemAction', {'params': {'command': 'split'}})<CR>"
   nnoremap <buffer><silent><expr> v
-        \ "<Cmd>call ddu#ui#filer#do_action('itemAction', {'params': {'command': 'vsplit'}})<CR>"
+        \ "<Cmd>call ddu#ui#do_action('itemAction', {'params': {'command': 'vsplit'}})<CR>"
   nnoremap <buffer><silent> n
-        \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'newFile'})<CR>
+        \ <Cmd>call ddu#ui#do_action('itemAction', {'name': 'newFile'})<CR>
   nnoremap <buffer><silent> m
-        \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'newDirectory'})<CR>
+        \ <Cmd>call ddu#ui#do_action('itemAction', {'name': 'newDirectory'})<CR>
   nnoremap <buffer><silent> d
-        \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'delete'})<CR>
+        \ <Cmd>call ddu#ui#do_action('itemAction', {'name': 'delete'})<CR>
   nnoremap <buffer><silent> r
-        \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'rename'})<CR>
+        \ <Cmd>call ddu#ui#do_action('itemAction', {'name': 'rename'})<CR>
   nnoremap <buffer><silent> ..
-        \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'narrow', 'params': {'path': '..'}})<CR>
+        \ <Cmd>call ddu#ui#do_action('itemAction', {'name': 'narrow', 'params': {'path': '..'}})<CR>
   nnoremap <buffer><silent> >
-        \ <Cmd>call ddu#ui#filer#do_action('updateOptions', {
+        \ <Cmd>call ddu#ui#do_action('updateOptions', {
         \   'sourceOptions': {
         \     '_': {
         \       'matchers': config#ddu#toggleHidden(),
@@ -123,7 +123,7 @@ function! s:ddu_filer_settings() abort
         \   },
         \ })<CR>
   nnoremap <buffer><silent> q
-        \  <Cmd>call ddu#ui#filer#do_action('quit')<CR>
+        \  <Cmd>call ddu#ui#do_action('quit')<CR>
 endfunction
 
 function! config#ddu#toggleHidden()
