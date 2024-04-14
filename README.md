@@ -9,7 +9,7 @@ git clone git@github.com:noganogami/dotfiles.git
 シンボリックリンクの作成
 
 ```
-./make_link.sh
+./setup.sh
 ```
 ## vim-lspのプラグインをインストール
 
