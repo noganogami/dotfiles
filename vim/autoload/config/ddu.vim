@@ -1,12 +1,74 @@
 function! s:ddu_ui_default_settings() abort
+  let win_height = round(&lines * 0.7)
+  let win_width = round(&columns / 2 * 0.7)
+  let win_col = round(&columns / 2 * 0.3)
+  let win_row = round((&lines - win_height) / 4)
+
+  let ff_config = {
+      \     'startAutoAction': v:true,
+      \     'autoAction': {'name': 'preview'},
+      \     'previewFloating': v:true,
+      \     'startFilter': v:false,
+      \   }
+
+  let floating_config = {
+      \     'split': 'floating',
+      \     'floatingBorder': 'rounded',
+      \     'floatingTitlePos': 'center',
+      \     'filterSplitDirection': 'floating',
+      \     'filterFloatingPosition': 'bottom',
+      \     'filterFloatingTitle': 'Filter',
+      \     'filterFloatingTitlePos': 'center',
+      \     'prompt': '> ',
+      \     'previewSplit': 'vertical',
+      \     'previewFloatingTitle': 'Preview',
+      \     'previewFloatingTitlePos': 'center',
+      \     'previewFloatingBorder': 'rounded',
+      \     'winHeight': win_height,
+      \     'winWidth': win_width,
+      \     'winRow': win_row,
+      \     'winCol': win_col - 1,
+      \     'previewHeight': win_height,
+      \     'previewWidth': win_width,
+      \     'previewRow': win_row,
+      \     'previewCol': win_col + win_width + 1,
+      \     'highlights': {
+      \       'floating': 'Normal',
+      \       'floatingBorder': 'Statement',
+      \     },
+      \   }
+
+  let ff_params = has('nvim')? s:join_dict(ff_config, floating_config): ff_config
+
+  let filer_params = has('nvim')? {
+      \     'split': 'floating',
+      \     'floatingTitle': 'Filer',
+      \     'floatingTitlePos': 'center',
+      \     'floatingBorder': 'rounded',
+      \     'previewFloating': v:true,
+      \     'previewSplit': 'vertical',
+      \     'previewFloatingTitle': 'Preview',
+      \     'previewFloatingTitlePos': 'center',
+      \     'previewFloatingBorder': 'rounded',
+      \     'winHeight': win_height,
+      \     'winWidth': win_width * 2,
+      \     'winRow': win_row,
+      \     'winCol': win_col - 1,
+      \     'previewHeight': win_height,
+      \     'previewWidth': win_width,
+      \     'previewRow': win_row,
+      \     'previewCol': win_col + win_width + 1,
+      \     'highlights': {
+      \       'floating': 'Normal',
+      \       'floatingBorder': 'Statement',
+      \     },
+      \   } : {}
+
+
   call ddu#custom#patch_global({
       \   'ui': 'ff',
       \   'uiParams': {
-      \     'ff': {
-      \       'startAutoAction': v:true,
-      \       'autoAction': {'name': 'preview'},
-      \       'previewFloating': v:true,
-      \     }
+      \     'ff': ff_params,
       \   },
       \   'sourceOptions': {
       \     '_': {
@@ -26,6 +88,9 @@ function! s:ddu_ui_default_settings() abort
 
   call ddu#custom#patch_local('filer', {
       \   'ui': 'filer',
+      \   'uiParams': {
+      \     'filer': filer_params,
+      \   },
       \   'sources': [
       \     {
       \       'name': 'file',
@@ -47,6 +112,12 @@ function! s:ddu_ui_default_settings() abort
       \     },
       \   }
       \ })
+endfunction
+
+function! s:join_dict(dict1, dict2) abort
+  let res = deepcopy(a:dict1)
+  call extend(res, a:dict2)
+  return res
 endfunction
 
 function! s:ddu_ff_settings() abort
@@ -146,7 +217,7 @@ function! s:key_mapping()
       \ <Cmd>call ddu#start({
       \   'uiParams': {
       \     'ff': {
-      \       'startFilter': v:false
+      \       'floatingTitle': 'Files',
       \     }
       \   },
       \   'sources': [
@@ -159,12 +230,19 @@ function! s:key_mapping()
       \   ],
       \ })<CR>
   nnoremap <silent> ;b
-      \ <Cmd>call ddu#start({'sources': [{'name': 'buffer'}]})<CR>
+      \ <Cmd>call ddu#start({
+      \   'uiParams': {
+      \     'ff': {
+      \       'floatingTitle': 'Buffer',
+      \     }
+      \   },
+      \   'sources': [{'name': 'buffer'}],
+      \ })<CR>
   nnoremap <silent> ;r
       \ <Cmd>call ddu#start({
       \   'uiParams': {
       \     'ff': {
-      \       'startAutoAction': v:false,
+      \       'floatingTitle': 'Register',
       \     }
       \   },
       \   'sources': [{'name': 'register'}],
@@ -175,7 +253,14 @@ function! s:key_mapping()
       \   },
       \ })<CR>
   nnoremap <silent> ;m
-      \ <Cmd>call ddu#start({'sources': [{'name': 'mr'}]})<CR>
+      \ <Cmd>call ddu#start({
+      \   'uiParams': {
+      \     'ff': {
+      \       'floatingTitle': 'Most Recently Used files',
+      \     }
+      \   },
+      \   'sources': [{'name': 'mr'}],
+      \ })<CR>
   nnoremap <silent> ;t
       \ <Cmd>call ddu#start({'name': 'filer'})<CR>
 endfunction
