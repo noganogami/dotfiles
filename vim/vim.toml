@@ -1,0 +1,14 @@
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+hook_add = '''
+  autocmd BufWritePre *.py,*.go execute('LspDocumentFormatSync')
+  autocmd BufWritePre *.ts,*.tsx execute('LspDocumentFormatSync --server=efm-langserver')
+  autocmd BufWritePre *.go execute('LspCodeActionSync source.organizeImports')
+  nnoremap <silent> gd :LspDefinition<CR>
+  nnoremap <silent> gi :LspImplementation<CR>
+  nnoremap <silent> gr :LspReferences<CR>
+  '''
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+hook_add = 'call config#lsp_settings#init()'

@@ -12,8 +12,14 @@ function! config#ddc#init()
       \       'ignoreCase': v:true,
       \     },
       \     'vim-lsp': {
-      \       'mark': 'LSP',
+      \       'mark': 'Vim-LSP',
       \       'forceCompletionPattern': '\.\w*|:\w*|->\w*',
+      \     },
+      \     'lsp': {
+      \       'mark': 'LSP',
+      \       'dup': 'keep',
+      \       'forceCompletionPattern': '\.\w*|:\w*|->\w*',
+      \       'keywordPattern': '\k+',
       \     },
       \     'around': {
       \       'mark': 'around',
