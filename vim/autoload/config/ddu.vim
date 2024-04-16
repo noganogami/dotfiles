@@ -41,6 +41,7 @@ function! s:ddu_ui_default_settings() abort
   let ff_params = has('nvim')? s:join_dict(ff_config, floating_config): ff_config
 
   let filer_params = has('nvim')? {
+      \     'sort': 'filename',
       \     'split': 'floating',
       \     'floatingTitle': 'Filer',
       \     'floatingTitlePos': 'center',
@@ -62,7 +63,9 @@ function! s:ddu_ui_default_settings() abort
       \       'floating': 'Normal',
       \       'floatingBorder': 'Statement',
       \     },
-      \   } : {}
+      \   } : {
+      \     'sort': 'filename',
+      \   }
 
 
   call ddu#custom#patch_global({
