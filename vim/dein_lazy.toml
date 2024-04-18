@@ -19,7 +19,7 @@ repo = 'matsui54/denops-popup-preview.vim'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo =  'Shougo/ddc.vim'
+repo = 'Shougo/ddc.vim'
 depends = ['denops.vim']
 on_event = 'InsertEnter'
 hook_source = 'call config#ddc#init()'
@@ -35,10 +35,6 @@ on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'Shun/ddc-source-vim-lsp'
-on_source = 'ddc.vim'
-
-[[plugins]]
-repo = 'Shougo/ddc-source-lsp'
 on_source = 'ddc.vim'
 
 [[plugins]]

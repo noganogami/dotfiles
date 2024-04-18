@@ -3,7 +3,7 @@ function! config#ddc#init()
 
   call ddc#custom#patch_global({
       \   'ui': 'pum',
-      \   'sources': ['vim-lsp','around'],
+      \   'sources': ['lsp', 'vim-lsp', 'around', 'buffer'],
       \   'sourceOptions': {
       \     '_': {
       \       'matchers': ['matcher_fuzzy'],
@@ -14,11 +14,11 @@ function! config#ddc#init()
       \     'vim-lsp': {
       \       'mark': 'Vim-LSP',
       \       'forceCompletionPattern': '\.\w*|:\w*|->\w*',
+      \       'sorters': ['sorter_lsp-kind'],
       \     },
       \     'lsp': {
       \       'mark': 'LSP',
       \       'dup': 'keep',
-      \       'forceCompletionPattern': '\.\w*|:\w*|->\w*',
       \       'keywordPattern': '\k+',
       \     },
       \     'around': {
@@ -26,6 +26,12 @@ function! config#ddc#init()
       \     },
       \     'buffer': {
       \       'mark': 'buffer',
+      \     },
+      \   },
+      \   'sourceParams': {
+      \     'lsp': {
+      \       'enableResolveItem': v:true,
+      \       'enableAdditionalTextEdit': v:true,
       \     },
       \   },
       \   'filterParams': {
