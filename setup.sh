@@ -11,3 +11,5 @@ do
       ln -s ~/dotfiles/$file ~/.$file
    fi
 done
+
+ln -s ~/.vim/autoload ~/.config/nvim/autoload
