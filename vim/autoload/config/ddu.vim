@@ -75,7 +75,7 @@ function! s:ddu_ui_default_settings() abort
       \   },
       \   'sourceOptions': {
       \     '_': {
-      \       'matchers': ['matcher_substring'],
+      \       'matchers': ['matcher_substring', 'matcher_hidden'],
       \       'ignoreCase': v:true,
       \     },
       \   },
