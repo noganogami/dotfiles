@@ -14,7 +14,6 @@ repo = 'williamboman/mason.nvim'
 repo = 'williamboman/mason-lspconfig.nvim'
 lua_add = '''
   require("ddc_source_lsp_setup").setup()
-  require("lspconfig").denols.setup({})
 
   require("mason").setup()
   require("mason-lspconfig").setup()

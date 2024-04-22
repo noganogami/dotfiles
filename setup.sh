@@ -13,3 +13,4 @@ do
 done
 
 ln -s ~/.vim/autoload ~/.config/nvim/autoload
+ln -s ~/.vim/denops ~/.config/nvim/denops

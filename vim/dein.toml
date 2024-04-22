@@ -55,3 +55,6 @@ repo = 'kana/vim-fakeclip'
 
 [[plugins]]
 repo = 'guns/xterm-color-table.vim'
+
+[[plugins]]
+repo = 'andymass/vim-matchup'
