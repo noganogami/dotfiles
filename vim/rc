@@ -8,7 +8,7 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
-autocmd! BufNewFile,BufRead *.vim,*.ts,*.tsx setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd! BufNewFile,BufRead *.vim,*.ts,*.tsx,*.js,*.vue setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
 set wildmenu
 set history=5000
