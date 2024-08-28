@@ -17,7 +17,7 @@ if &runtimepath !~# '/dein.vim'
   execute 'set runtimepath^=' . s:dein_repo_dir
 endif
 
-" load plugin configration
+" load plugin configuration
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
