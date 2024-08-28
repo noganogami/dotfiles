@@ -16,7 +16,7 @@ if [ $TERM = "alacritty" ]; then
   fi
 fi
 
-files=("vimrc" "tmux.conf" "config/git" "config/nvim" "config/sheldon" "config/efm-langserver" "vim")
+files=("vimrc" "tmux.conf" "config/git" "config/nvim" "config/wezterm" "config/sheldon" "config/efm-langserver" "vim")
 for file in "${files[@]}"
 do
    if [ ! -e ~/.$file ];then

@@ -11,6 +11,8 @@ local act = wezterm.action
 -- For example, changing the color scheme:
 config.color_scheme = 'Dracula+'
 
+config.font = wezterm.font("HackGen Console")
+
 config.window_padding = {
     left = 0,
     right = 0,
