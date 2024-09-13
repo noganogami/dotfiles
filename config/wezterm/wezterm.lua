@@ -62,6 +62,16 @@ config.keys = {
         key = 'z',
         action = act.TogglePaneZoomState,
     },
+    {
+        mods   = 'LEADER',
+        key    = "[",
+        action = act.ActivateCopyMode,
+    },
+    {
+        mods = 'LEADER',
+        key = 'p',
+        action = act.PasteFrom 'Clipboard'
+    },
 }
 for i = 1, 8 do
     -- LEADER + number to activate that tab
