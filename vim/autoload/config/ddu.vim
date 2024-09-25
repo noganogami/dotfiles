@@ -141,13 +141,7 @@ function! s:ddu_ff_settings() abort
   nnoremap <buffer><silent> i
         \ <Cmd>call ddu#ui#do_action('openFilterWindow')<CR>
   nnoremap <buffer><silent> >
-        \ <Cmd>call ddu#ui#do_action('updateOptions', {
-        \   'sourceOptions': {
-        \     '_': {
-        \       'matchers': config#ddu#toggleHidden(),
-        \     },
-        \   },
-        \ })<CR>
+        \ <Cmd>call config#ddu#updateOptions()<CR>
   nnoremap <buffer><silent> q
         \ <Cmd>call ddu#ui#do_action('quit')<CR>
 endfunction
@@ -189,15 +183,20 @@ function! s:ddu_filer_settings() abort
   nnoremap <buffer><silent> ..
         \ <Cmd>call ddu#ui#do_action('itemAction', {'name': 'narrow', 'params': {'path': '..'}})<CR>
   nnoremap <buffer><silent> >
-        \ <Cmd>call ddu#ui#do_action('updateOptions', {
-        \   'sourceOptions': {
-        \     '_': {
-        \       'matchers': config#ddu#toggleHidden(),
-        \     },
-        \   },
-        \ })<CR>
+        \ <Cmd>call config#ddu#updateOptions()<CR>
   nnoremap <buffer><silent> q
         \  <Cmd>call ddu#ui#do_action('quit')<CR>
+endfunction
+
+function! config#ddu#updateOptions()
+  call ddu#ui#do_action('updateOptions', {
+  \  'sourceOptions': {
+  \     '_': {
+  \       'matchers': config#ddu#toggleHidden(),
+  \     },
+  \   },
+  \ })
+  call ddu#ui#do_action('redraw', { 'method': 'refreshItems' })
 endfunction
 
 function! config#ddu#toggleHidden()
