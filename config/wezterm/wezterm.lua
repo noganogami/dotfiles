@@ -6,12 +6,16 @@ local config = wezterm.config_builder()
 
 local act = wezterm.action
 
+local mux = wezterm.mux
+
 -- This is where you actually apply your config choices
 
 -- For example, changing the color scheme:
 config.color_scheme = 'Dracula+'
 
 config.font = wezterm.font("HackGen Console")
+
+config.use_ime = false
 
 config.window_padding = {
     left = 0,
@@ -20,7 +24,9 @@ config.window_padding = {
     bottom = 0,
 }
 
-config.leader = { key = 'j', mods = 'CTRL', timeout_milliseconds = 1000 }
+config.native_macos_fullscreen_mode = true
+
+config.leader = { key = 'b', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.keys = {
     {
         key = 'c',
@@ -87,6 +93,12 @@ for i = 1, 8 do
         action = act.MoveTab(i - 1),
     })
 end
+
+wezterm.on('gui-startup', function(cmd)
+    local _, pane, window = mux.spawn_window(cmd or {})
+    local gui_window = window:gui_window();
+    gui_window:perform_action(wezterm.action.ToggleFullScreen, pane)
+end)
 
 -- and finally, return the configuration to wezterm
 return config

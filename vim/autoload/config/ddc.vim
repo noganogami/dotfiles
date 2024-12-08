@@ -3,7 +3,7 @@ function! config#ddc#init()
 
   call ddc#custom#patch_global({
       \   'ui': 'pum',
-      \   'sources': ['lsp', 'vim-lsp', 'around', 'buffer'],
+      \   'sources': ['lsp', 'skkeleton', 'around', 'buffer'],
       \   'sourceOptions': {
       \     '_': {
       \       'matchers': ['matcher_fuzzy'],
@@ -11,15 +11,19 @@ function! config#ddc#init()
       \       'converters': ['converter_fuzzy', 'converter_remove_overlap'],
       \       'ignoreCase': v:true,
       \     },
-      \     'vim-lsp': {
-      \       'mark': 'Vim-LSP',
-      \       'forceCompletionPattern': '\.\w*|:\w*|->\w*',
-      \       'sorters': ['sorter_lsp-kind'],
-      \     },
       \     'lsp': {
       \       'mark': 'LSP',
       \       'dup': 'keep',
+      \       'forceCompletionPattern': '\.\w*|:\w*|->\w*',
       \       'keywordPattern': '\k+',
+      \     },
+      \     'skkeleton': {
+      \       'mark': 'skkeleton',
+      \       'matchers': [],
+      \       'sorters': [],
+      \       'converters': [],
+      \       'isVolatile': v:true,
+      \       'minAutoCompleteLength': 1,
       \     },
       \     'around': {
       \       'mark': 'around',

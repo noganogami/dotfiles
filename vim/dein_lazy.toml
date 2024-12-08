@@ -1,12 +1,19 @@
 [[plugins]]
 repo = 'vim-denops/denops.vim'
-on_source = ['denops-helloworld.vim', 'mr.vim', 'ddu.vim', 'ddc.vim']
-# on_event = 'VimEnter'
+on_source = ['vim-gin', 'mr.vim', 'ddu.vim']
 
 # [[plugins]]
-# repo = 'vim-denops/denops-helloworld.vim'
+# repo = 'lambdalisue/kensaku.vim'
+# depends = ['kensaku.vim']
+# hook_source = 'cnoremap <CR> <Plug>(kensaku-search-replace)<CR>'
+
+# [[plugins]]
+# repo = 'lambdalisue/vim-kensaku-search'
 # depends = ['denops.vim']
-# on_event = 'VimEnter'
+
+[[plugins]]
+repo = 'lambdalisue/vim-gin'
+depends = ['denops.vim']
 
 [[plugins]]
 repo = 'Shougo/pum.vim'
@@ -36,8 +43,12 @@ repo = 'Shougo/ddc-source-around'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'Shun/ddc-source-vim-lsp'
+repo = 'Shougo/ddc-source-lsp'
 on_source = 'ddc.vim'
+
+# [[plugins]]
+# repo = 'Shun/ddc-source-vim-lsp'
+# on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'tani/ddc-fuzzy'
@@ -55,102 +66,20 @@ on_source = 'ddc.vim'
 repo = 'matsui54/denops-popup-preview.vim'
 on_source = 'ddc.vim'
 
-# [[plugins]]
-# repo = 'prabirshrestha/asyncomplete.vim'
-# on_event = 'BufEnter'
-# hook_source = '''
-#   inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-#   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-#   inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
-
-#   " allow modifying the completeopt variable, or it will
-#   " be overridden all the time
-#   let g:asyncomplete_auto_completeopt = 0
-
-#   set completeopt=menuone,noinsert,noselect,preview
-# '''
-
-# [[plugins]]
-# repo = 'prabirshrestha/asyncomplete-lsp.vim'
-# on_event = 'BufEnter'
-# depends = ['asyncomplete.vim']
-
-# [[plugins]]
-# repo = 'rhysd/vim-clang-format'
-# on_ft = ['c', 'cpp', 'javascript', 'typescript']
-# hook_source = '''ClangFormatAutoEnable'''
-
-# [[plugins]]
-# repo = 'kana/vim-operator-user'
-# on_ft = ['c', 'cpp', 'javascript', 'typescript']
-
-# [[plugins]]
-# repo = 'maxmellon/vim-jsx-pretty'
-# on_ft = ['javascriptreact']
-# hook_source = '''autocmd BufWrite *.jsx :call preserve#Preserve(':normal ggVG=')'''
-
-# [[plugins]]
-# repo = 'previm/previm'
-# on_ft = ['markdown']
-# hook_source = '''
-#   if system('uname') =~ 'darwin'  " mac
-#       let g:previm_open_cmd = 'open -a google\ chrome'
-#   elseif isdirectory('/mnt/c')    " wsl
-#       let g:previm_open_cmd = '/mnt/c/program\ files\ \(x86\)/google/chrome/application/chrome.exe'
-#       let g:previm_wsl_mode = 1
-#   endif 
-#   let g:previm_extra_libraries = [
-#       \   {
-#       \     'name': 'katex',
-#       \     'files': [
-#       \       {
-#       \         'type': 'css',
-#       \         'path': '_/js/extra/texmath.min.css',
-#       \         'url': 'https://cdn.jsdelivr.net/npm/markdown-it-texmath/css/texmath.min.css',
-#       \       },
-#       \       {
-#       \         'type': 'css',
-#       \         'path': '_/css/extra/katex.min.css',
-#       \         'url': 'https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css',
-#       \         'code': [
-#       \           'renderMathInElement(document.body)',
-#       \         ],
-#       \       },
-#       \       {
-#       \         'type': 'js',
-#       \         'path': '_/js/extra/katex-auto-render.min.js',
-#       \         'url': 'https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/auto-render.min.js',
-#       \         'code': [
-#       \           'renderMathInElement(document.body)',
-#       \         ],
-#       \       },
-#       \       {
-#       \         'type': 'js',
-#       \         'path': '_/js/extra/katex.min.js',
-#       \         'url': 'https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js',
-#       \         'code': [
-#       \           'document.querySelectorAll(''pre code.language-katex'').forEach(elem => {',
-#       \           '  const html = katex.renderToString(elem.innerText, {',
-#       \           '    displayMode: true,',
-#       \           '    output: ''html'',',
-#       \           '    throwOnError: false,',
-#       \           '  })',
-#       \           '  const span = document.createElement(''span'')',
-#       \           '  span.innerHTML = html',
-#       \           '  elem.parentNode.replaceWith(span)',
-#       \           '})',
-#       \           'document.querySelectorAll(''.inlkatex'').forEach(elem => {',
-#       \           '  const html = katex.renderToString(elem.innerText, {',
-#       \           '    output: ''html'',',
-#       \           '    throwOnError: false,',
-#       \           '  })',
-#       \           '  const span = document.createElement(''span'')',
-#       \           '  span.innerHTML = html',
-#       \           '  elem.replaceWith(span)',
-#       \           '})',
-#       \         ],
-#       \       },
-#       \     ],
-#       \   },
-#       \ ]
-# '''
+[[plugins]]
+repo = 'vim-skk/skkeleton'
+depends = ['denops.vim']
+on_source = 'ddc.vim'
+hook_post_source = '''
+  call skkeleton#config({ 
+  \   'globalDictionaries': [
+  \     ['~/.skk/SKK-JISYO.L', 'euc-jp'],
+  \     ['~/.skk/SKK-JISYO.geo', 'euc-jp'],
+  \     ['~/.skk/SKK-JISYO.jinmei', 'euc-jp'],
+  \     ['~/.skk/SKK-JISYO.propernoun', 'euc-jp'],
+  \     ['~/.skk/SKK-JISYO.station', 'euc-jp'],
+  \   ] 
+  \ })
+  inoremap <C-j> <Plug>(skkeleton-enable)
+  cnoremap <C-j> <Plug>(skkeleton-enable)
+'''

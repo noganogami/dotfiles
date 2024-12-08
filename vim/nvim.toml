@@ -1,7 +1,4 @@
 [[plugins]]
-repo = 'Shougo/ddc-source-lsp'
-
-[[plugins]]
 repo = 'uga-rosa/ddc-source-lsp-setup'
 
 [[plugins]]
@@ -16,7 +13,15 @@ lua_add = '''
   require("ddc_source_lsp_setup").setup()
 
   require("mason").setup()
-  require("mason-lspconfig").setup()
+  require("mason-lspconfig").setup({
+    ensure_installed = {
+      "typos_lsp",
+      "tsserver", 
+      "gopls", 
+      "clangd", 
+      "pylsp" 
+    }
+  })
   require("mason-lspconfig").setup_handlers {
     function(server_name)
       local opt = {
@@ -39,6 +44,14 @@ lua_add = '''
       }
       require("lspconfig")[server_name].setup(opt)
     end,
+    ["clangd"] = function ()
+      local lspconfig = require('lspconfig')
+      lspconfig.clangd.setup({
+        init_options = {
+          fallbackFlags = { '-std=c++17' },
+        },
+      })
+    end
   }
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
