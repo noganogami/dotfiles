@@ -26,7 +26,7 @@ config.window_padding = {
 
 config.native_macos_fullscreen_mode = true
 
-config.leader = { key = 'b', mods = 'CTRL', timeout_milliseconds = 1000 }
+config.leader = { key = 'q', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.keys = {
     {
         key = 'c',

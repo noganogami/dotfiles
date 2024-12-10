@@ -18,7 +18,7 @@ function! config#ddc#init()
       \       'keywordPattern': '\k+',
       \     },
       \     'skkeleton': {
-      \       'mark': 'skkeleton',
+      \       'mark': 'Skkeleton',
       \       'matchers': [],
       \       'sorters': [],
       \       'converters': [],
@@ -26,10 +26,10 @@ function! config#ddc#init()
       \       'minAutoCompleteLength': 1,
       \     },
       \     'around': {
-      \       'mark': 'around',
+      \       'mark': 'Around',
       \     },
       \     'buffer': {
-      \       'mark': 'buffer',
+      \       'mark': 'Buffer',
       \     },
       \   },
       \   'sourceParams': {

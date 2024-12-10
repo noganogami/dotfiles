@@ -43,14 +43,6 @@ repo = 'Shougo/ddc-source-around'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'Shougo/ddc-source-lsp'
-on_source = 'ddc.vim'
-
-# [[plugins]]
-# repo = 'Shun/ddc-source-vim-lsp'
-# on_source = 'ddc.vim'
-
-[[plugins]]
 repo = 'tani/ddc-fuzzy'
 on_source = 'ddc.vim'
 

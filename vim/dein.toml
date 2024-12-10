@@ -58,3 +58,19 @@ repo = 'guns/xterm-color-table.vim'
 
 [[plugins]]
 repo = 'andymass/vim-matchup'
+
+# [[plugins]]
+# repo = '4513ECHO/nvim-keycastr'
+# lua_add = '''
+#   local keycastr = require("keycastr")
+
+#   keycastr.config.set {
+#       ignore_mouse = true,
+#       position = "SE",
+#       win_config = {
+#           border = "rounded",
+#       },
+#   }
+
+#   keycastr.enable()
+# '''

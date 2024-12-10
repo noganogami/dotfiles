@@ -215,7 +215,7 @@ function! config#ddu#toggleHidden()
 endfunction
 
 function! s:key_mapping()
-  nnoremap <silent> ;f
+  nnoremap <silent> <Leader>f
       \ <Cmd>call ddu#start({
       \   'uiParams': {
       \     'ff': {
@@ -231,7 +231,7 @@ function! s:key_mapping()
       \     }
       \   ],
       \ })<CR>
-  nnoremap <silent> ;b
+  nnoremap <silent> <Leader>b
       \ <Cmd>call ddu#start({
       \   'uiParams': {
       \     'ff': {
@@ -240,7 +240,7 @@ function! s:key_mapping()
       \   },
       \   'sources': [{'name': 'buffer'}],
       \ })<CR>
-  nnoremap <silent> ;r
+  nnoremap <silent> <Leader>r
       \ <Cmd>call ddu#start({
       \   'uiParams': {
       \     'ff': {
@@ -254,7 +254,7 @@ function! s:key_mapping()
       \     },
       \   },
       \ })<CR>
-  nnoremap <silent> ;m
+  nnoremap <silent> <Leader>m
       \ <Cmd>call ddu#start({
       \   'uiParams': {
       \     'ff': {
@@ -263,7 +263,7 @@ function! s:key_mapping()
       \   },
       \   'sources': [{'name': 'mr'}],
       \ })<CR>
-  nnoremap <silent> ;t
+  nnoremap <silent> <Leader>t
       \ <Cmd>call ddu#start({'name': 'filer'})<CR>
 endfunction
 

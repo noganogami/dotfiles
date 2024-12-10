@@ -1,4 +1,7 @@
 [[plugins]]
+repo = 'Shougo/ddc-source-lsp'
+
+[[plugins]]
 repo = 'uga-rosa/ddc-source-lsp-setup'
 
 [[plugins]]
