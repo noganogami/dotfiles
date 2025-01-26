@@ -3,7 +3,6 @@ set number
 set confirm
 set clipboard=unnamed
 set cursorline
-set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
 
 set tabstop=4
 set shiftwidth=4

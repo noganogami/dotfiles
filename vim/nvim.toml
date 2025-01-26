@@ -1,4 +1,7 @@
 [[plugins]]
+repo = 'nanotee/sqls.nvim'
+
+[[plugins]]
 repo = 'Shougo/ddc-source-lsp'
 
 [[plugins]]
@@ -22,7 +25,8 @@ lua_add = '''
       "tsserver", 
       "gopls", 
       "clangd", 
-      "pylsp" 
+      "pylsp",
+      "sqls",
     }
   })
   require("mason-lspconfig").setup_handlers {
@@ -54,8 +58,9 @@ lua_add = '''
           fallbackFlags = { '-std=c++17' },
         },
       })
-    end
+    end,
     ["lua_ls"] = function ()
+      local lspconfig = require('lspconfig')
       lspconfig.lua_ls.setup({
         settings = {
             Lua = {
@@ -65,7 +70,25 @@ lua_add = '''
             }
         }
       })
-    end
+    end,
+    ["sqls"] = function ()
+      local lspconfig = require('lspconfig')
+      lspconfig.sqls.setup({
+        on_attach = function(client, bufnr)
+          require('sqls').on_attach(client, bufnr)
+        end,
+        settings = {
+            sqls = {
+              connections = {
+                {
+                  driver = 'postgresql',
+                  dataSourceName = 'host=127.0.0.1 port=5432 user=postgres password=secret dbname=postgres sslmode=disable',
+                },
+              },
+            },
+          },
+      })
+    end,
   }
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
