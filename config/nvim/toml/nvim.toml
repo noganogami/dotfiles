@@ -1,0 +1,20 @@
+[[plugins]]
+repo = 'nanotee/sqls.nvim'
+
+[[plugins]]
+repo = 'Shougo/ddc-source-lsp'
+
+[[plugins]]
+repo = 'uga-rosa/ddc-source-lsp-setup'
+
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+
+[[plugins]]
+repo = 'williamboman/mason.nvim'
+
+[[plugins]]
+repo = 'williamboman/mason-lspconfig.nvim'
+lua_add = '''
+  require('config.lspconfig')
+'''

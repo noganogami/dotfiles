@@ -1,0 +1,76 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'jonathanfilip/vim-lucius'
+hook_add = '''
+  let g:lucius_style = 'dark'
+  let g:lucius_contrast = 'low'
+  let g:lucius_contrast_bg = 'high'
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+hook_add = '''
+  let g:airline_theme = 'lucius'
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#formatter = 'unique_tail'
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+
+[[plugins]]
+repo = 'edkolev/tmuxline.vim'
+hook_add = '''
+  let g:tmuxline_theme = 'lucius'
+  let g:airline#extensions#tmuxline#enabled = 1
+'''
+depends = ['vim-airline']
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'tpope/vim-repeat'
+
+[[plugins]]
+repo = 'tpope/vim-speeddating'
+
+[[plugins]]
+repo = 'tpope/vim-commentary'
+
+[[plugins]]
+repo = 'simeji/winresizer'
+hook_add = '''
+  let g:winresizer_start_key = '<C-t>'
+  let g:winresizer_vert_resize = 3
+'''
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+
+[[plugins]]
+repo = 'kana/vim-fakeclip'
+
+[[plugins]]
+repo = 'guns/xterm-color-table.vim'
+
+[[plugins]]
+repo = 'andymass/vim-matchup'
+
+# [[plugins]]
+# repo = '4513ECHO/nvim-keycastr'
+# lua_add = '''
+#   local keycastr = require("keycastr")
+
+#   keycastr.config.set {
+#       ignore_mouse = true,
+#       position = "SE",
+#       win_config = {
+#           border = "rounded",
+#       },
+#   }
+
+#   keycastr.enable()
+# '''

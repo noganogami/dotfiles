@@ -16,7 +16,8 @@ if [ $TERM = "alacritty" ]; then
   fi
 fi
 
-files=("vimrc" "tmux.conf" "config/git" "config/nvim" "config/wezterm" "config/sheldon" "config/efm-langserver" "vim")
+files=("vimrc" "tmux.conf" "config/git" "config/nvim" "config/wezterm" "config/sheldon")
+# files=("vimrc" "tmux.conf" "config/git" "config/nvim" "config/wezterm" "config/sheldon" "config/efm-langserver" "vim")
 for file in "${files[@]}"
 do
    if [ ! -e ~/.$file ];then
@@ -25,8 +26,16 @@ do
 done
 
 if [ ! -e ~/.config/nvim ]; then
-  ln -s ~/.vim/autoload ~/.config/nvim/autoload
-  ln -s ~/.vim/denops ~/.config/nvim/denops
+  # ln -s ~/.vim/autoload ~/.config/nvim/autoload
+  # ln -s ~/.vim/denops ~/.config/nvim/denops
+  if [ ! -e ~/.vim/ ]; then
+    mkdir ~/.vim
+  fi
+  ln -s ~/.config/nvim/autoload ~/.vim/autoload
+  ln -s ~/.config/nvim/denops ~/.vim/denops
+  ln -s ~/.config/nvim/rc ~/.vim/rc
+  ln -s ~/.config/nvim/toml ~/.vim/toml
+  ln -s ~/.config/nvim/plugin ~/.vim/plugin
 fi
 
 if [ -f ~/.zshrc ] && ! grep -q "eval \"\$(sheldon source)\"" ~/.zshrc; then
