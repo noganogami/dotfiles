@@ -20,6 +20,26 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'MunifTanjim/nui.nvim'
+
+[[plugins]]
+repo = 'rcarriga/nvim-notify'
+
+[[plugins]]
+repo = 'folke/noice.nvim'
+depends = ['nui.nvim', 'nvim-notify']
+lua_add = '''
+  require('noice').setup({
+    routes = {
+      {
+        filter = { event = "msg_showmode" },
+        view = "notify",
+      },
+    },
+  })
+'''
+
+[[plugins]]
 repo = 'nanotee/sqls.nvim'
 
 [[plugins]]
