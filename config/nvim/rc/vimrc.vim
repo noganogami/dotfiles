@@ -45,3 +45,6 @@ let mapleader = "\<Space>"
 
 autocmd! TextYankPost * :call yankukku#Yank()
 execute 'source' $"{'<sfile>'->expand()->fnamemodify(':h')}/dein.vim"
+
+filetype plugin indent on
+syntax enable

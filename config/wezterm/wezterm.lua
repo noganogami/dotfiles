@@ -11,7 +11,11 @@ local mux = wezterm.mux
 -- This is where you actually apply your config choices
 
 -- For example, changing the color scheme:
-config.color_scheme = 'Dracula+'
+-- Optionally: config.color_scheme_dirs = { '/.../.config/wezterm/colors/' }
+config.color_scheme = 'Yorumi Abyss' -- Options: Yorumi-[Mist|Abyss|Kraken|Shade]
+
+-- config.window_background_image = wezterm.home_dir .. '/.config/wezterm/images/divergence-meter.jpg'
+-- config.window_background_opacity = 0.2
 
 config.font = wezterm.font("HackGen Console")
 

@@ -20,25 +20,21 @@ files=("vimrc" "tmux.conf" "config/git" "config/nvim" "config/wezterm" "config/s
 # files=("vimrc" "tmux.conf" "config/git" "config/nvim" "config/wezterm" "config/sheldon" "config/efm-langserver" "vim")
 for file in "${files[@]}"
 do
-   if [ ! -e ~/.$file ];then
-      ln -s ~/dotfiles/$file ~/.$file
-   fi
+  if [ ! -e ~/.$file ];then
+     ln -s ~/dotfiles/$file ~/.$file
+  fi
 done
 
-if [ ! -e ~/.config/nvim ]; then
-  # ln -s ~/.vim/autoload ~/.config/nvim/autoload
-  # ln -s ~/.vim/denops ~/.config/nvim/denops
-  if [ ! -e ~/.vim/ ]; then
-    mkdir ~/.vim
-  fi
-  ln -s ~/.config/nvim/autoload ~/.vim/autoload
-  ln -s ~/.config/nvim/denops ~/.vim/denops
-  ln -s ~/.config/nvim/rc ~/.vim/rc
-  ln -s ~/.config/nvim/toml ~/.vim/toml
-  ln -s ~/.config/nvim/plugin ~/.vim/plugin
+if [ ! -e ~/.vim/ ]; then
+  mkdir ~/.vim
 fi
+ln -s ~/.config/nvim/autoload ~/.vim/autoload
+ln -s ~/.config/nvim/denops ~/.vim/denops
+ln -s ~/.config/nvim/rc ~/.vim/rc
+ln -s ~/.config/nvim/toml ~/.vim/toml
+ln -s ~/.config/nvim/plugin ~/.vim/plugin
 
 if [ -f ~/.zshrc ] && ! grep -q "eval \"\$(sheldon source)\"" ~/.zshrc; then
-    echo "" >> ~/.zshrc
-    echo 'eval "$(sheldon source)"' >> ~/.zshrc
+  echo "" >> ~/.zshrc
+  echo 'eval "$(sheldon source)"' >> ~/.zshrc
 fi
