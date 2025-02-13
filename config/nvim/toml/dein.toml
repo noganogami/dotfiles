@@ -2,17 +2,6 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo = 'vim-airline/vim-airline'
-hook_add = '''
-  let g:airline_theme = 'lucius'
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#formatter = 'unique_tail'
-'''
-
-[[plugins]]
-repo = 'vim-airline/vim-airline-themes'
-
-[[plugins]]
 repo = 'edkolev/tmuxline.vim'
 hook_add = '''
   let g:tmuxline_theme = 'lucius'
