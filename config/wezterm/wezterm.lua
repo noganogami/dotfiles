@@ -10,6 +10,10 @@ local mux = wezterm.mux
 
 -- This is where you actually apply your config choices
 
+wezterm.on('update-status', function(window, pane)
+    window:set_right_status(window:active_workspace())
+end)
+
 -- For example, changing the color scheme:
 -- Optionally: config.color_scheme_dirs = { '/.../.config/wezterm/colors/' }
 config.color_scheme = 'Yorumi Abyss' -- Options: Yorumi-[Mist|Abyss|Kraken|Shade]
@@ -81,6 +85,75 @@ config.keys = {
         mods = 'LEADER',
         key = 'p',
         action = act.PasteFrom 'Clipboard'
+    },
+    -- -- -- Prompt for a name to use for a new workspace and switch to it.
+    {
+        mods = 'LEADER',
+        key = 'w',
+        action = wezterm.action_callback(function(window, pane)
+            -- Here you can dynamically construct a longer list if needed
+            local workspaces = {}
+            for i, name in ipairs(wezterm.mux.get_workspace_names()) do
+                table.insert(workspaces, {
+                    id = name,
+                    label = string.format("Swhich to Workspace: %s", name),
+                })
+            end
+            table.insert(workspaces, {
+                id = "CREATE",
+                label = "Create new Workspace",
+            })
+            window:perform_action(
+                act.InputSelector {
+                    action = wezterm.action_callback(
+                        function(inner_window, inner_pane, id, label)
+                            if not id and not label then
+                                wezterm.log_info 'cancelled'
+                            elseif id == "CREATE" then
+                                inner_window:perform_action(
+                                    act.PromptInputLine {
+                                        description = wezterm.format {
+                                            { Attribute = { Intensity = 'Bold' } },
+                                            { Foreground = { AnsiColor = 'Fuchsia' } },
+                                            { Text = 'Enter name for new workspace' },
+                                        },
+                                        action = wezterm.action_callback(function(prompt_window, prompt_pane, line)
+                                            -- line will be `nil` if they hit escape without entering anything
+                                            -- An empty string if they just hit enter
+                                            -- Or the actual line of text they wrote
+                                            if line then
+                                                wezterm.log_info 'created'
+                                                wezterm.log_info('name: ' .. line)
+                                                prompt_window:perform_action(
+                                                    act.SwitchToWorkspace {
+                                                        name = line,
+                                                    },
+                                                    prompt_pane
+                                                )
+                                            end
+                                        end),
+                                    },
+                                    inner_pane
+                                )
+                            else
+                                wezterm.log_info('name: ' .. id)
+                                inner_window:perform_action(
+                                    act.SwitchToWorkspace {
+                                        name = id,
+                                    },
+                                    inner_pane
+                                )
+                            end
+                        end
+                    ),
+                    title = 'Choose Workspace',
+                    choices = workspaces,
+                    fuzzy = false,
+                    description = 'Select or make a workspace',
+                },
+                pane
+            )
+        end),
     },
 }
 for i = 1, 8 do
