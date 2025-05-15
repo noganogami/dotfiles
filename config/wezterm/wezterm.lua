@@ -10,10 +10,6 @@ local mux = wezterm.mux
 
 -- This is where you actually apply your config choices
 
--- wezterm.on('update-status', function(window, pane)
---     window:set_right_status(window:active_workspace())
--- end)
-
 -- For example, changing the color scheme:
 -- Optionally: config.color_scheme_dirs = { '/.../.config/wezterm/colors/' }
 config.color_scheme = 'Yorumi Abyss' -- Options: Yorumi-[Mist|Abyss|Kraken|Shade]
