@@ -11,3 +11,5 @@
 	prompt = false
 [merge]
 	tool = nvimdiff
+[alias]
+	cb = rev-parse --abbrev-ref HEAD

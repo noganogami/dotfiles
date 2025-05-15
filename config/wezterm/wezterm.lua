@@ -10,9 +10,9 @@ local mux = wezterm.mux
 
 -- This is where you actually apply your config choices
 
-wezterm.on('update-status', function(window, pane)
-    window:set_right_status(window:active_workspace())
-end)
+-- wezterm.on('update-status', function(window, pane)
+--     window:set_right_status(window:active_workspace())
+-- end)
 
 -- For example, changing the color scheme:
 -- Optionally: config.color_scheme_dirs = { '/.../.config/wezterm/colors/' }
@@ -86,6 +86,11 @@ config.keys = {
         key = 'p',
         action = act.PasteFrom 'Clipboard'
     },
+    {
+        mods = 'LEADER',
+        key = 'q',
+        action = wezterm.action.CloseCurrentPane { confirm = true },
+    },
     -- -- -- Prompt for a name to use for a new workspace and switch to it.
     {
         mods = 'LEADER',
@@ -103,6 +108,7 @@ config.keys = {
                 id = "CREATE",
                 label = "Create new Workspace",
             })
+            local active = window:active_workspace()
             window:perform_action(
                 act.InputSelector {
                     action = wezterm.action_callback(
@@ -149,7 +155,7 @@ config.keys = {
                     title = 'Choose Workspace',
                     choices = workspaces,
                     fuzzy = false,
-                    description = 'Select or make a workspace',
+                    description = string.format("Select or make a workspace (current is '%s')", active),
                 },
                 pane
             )

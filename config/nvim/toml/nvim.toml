@@ -97,3 +97,14 @@ repo = 'williamboman/mason-lspconfig.nvim'
 lua_add = '''
   require('config.lspconfig')
 '''
+
+[[plugins]]
+repo = 'joshuavial/aider.nvim'
+lua_add = '''
+  require('aider').setup({
+    auto_manage_context = true,
+    default_bindings = true,
+    debug = false,
+    ignore_buffers = {},
+  })
+'''

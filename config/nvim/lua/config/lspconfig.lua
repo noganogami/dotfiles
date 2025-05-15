@@ -4,11 +4,11 @@ require("mason").setup()
 require("mason-lspconfig").setup({
     ensure_installed = {
         "typos_lsp",
-        "tsserver",
+        "ts_ls",
         "gopls",
-        "clangd",
-        "pylsp",
-        "sqls",
+        -- "clangd",
+        "pyright",
+        -- "sqls",
     }
 })
 
@@ -57,6 +57,44 @@ local handlers = {
         }
     end,
     -- override for specifics
+    ["efm"] = function()
+        lspconfig.efm.setup {
+            init_options = { documentFormatting = true },
+            settings = {
+                rootMarkers = { ".git/" },
+                languages = {
+                    python = {
+                        {
+                            formatCommand = "uvx ruff check --select I --fix --quiet -",
+                            formatStdin = true,
+                        },
+                        {
+                            formatCommand = "uvx ruff format --quiet -",
+                            formatStdin = true,
+                        },
+                    },
+                },
+            },
+        }
+    end,
+    ["pyright"] = function()
+        lspconfig.pyright.setup {
+            settings = {
+                -- pyright = {
+                -- disableOrganizeImports = true,
+                -- },
+                python = {
+                    pythonPath = '.venv/bin/python',
+                    -- formatting = {
+                    --     provider = "none",
+                    -- },
+                    -- analysis = {
+                    --     ignore = { '*' }
+                    -- },
+                },
+            },
+        }
+    end,
     ["clangd"] = function()
         lspconfig.clangd.setup {
             init_options = {

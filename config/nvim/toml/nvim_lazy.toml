@@ -1,4 +1,9 @@
+# [[plugins]]
+# repo = 'iamcco/markdown-preview.nvim'
+# on_ft = ['markdown']
+# build = 'sh -c "cd app && yarn install"'
+
 [[plugins]]
-repo = 'iamcco/markdown-preview.nvim'
+repo = 'kat0h/bufpreview.vim'
 on_ft = ['markdown']
-build = 'sh -c "cd app && npx --yes yarn install"'
+build = 'deno task prepare'

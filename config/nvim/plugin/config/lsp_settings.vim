@@ -3,7 +3,11 @@ function! config#lsp_settings#init()
   let g:lsp_settings = {
       \   'pylsp-all': {
       \     'workspace_config': {
+      \       'pyright': {
+      \         'pythonPath': '.venv/bin/python',
+      \       },
       \       'pylsp': {
+      \         'disabled': 1,
       \         'configurationSources': ['flake8'],
       \         'plugins': {
       \           'autopep8': {

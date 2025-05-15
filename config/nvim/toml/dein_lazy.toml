@@ -64,6 +64,7 @@ depends = ['denops.vim']
 on_source = 'ddc.vim'
 hook_post_source = '''
   call skkeleton#config({ 
+  \   'userDictionary': expand('~/.skk/skk-jisyo.utf8'),
   \   'globalDictionaries': [
   \     ['~/.skk/SKK-JISYO.L', 'euc-jp'],
   \     ['~/.skk/SKK-JISYO.geo', 'euc-jp'],
@@ -75,3 +76,7 @@ hook_post_source = '''
   inoremap <C-j> <Plug>(skkeleton-enable)
   cnoremap <C-j> <Plug>(skkeleton-enable)
 '''
+
+[[plugins]]
+repo = 'github/copilot.vim'
+on_event = 'InsertEnter'
