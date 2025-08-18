@@ -16,7 +16,7 @@ if [ $TERM = "alacritty" ]; then
   fi
 fi
 
-files=("vimrc" "tmux.conf" "config/git" "config/nvim" "config/wezterm" "config/sheldon")
+files=("vimrc" "tmux.conf" "config/git" "config/nvim" "config/wezterm" "config/sheldon" "config/karabiner/karabiner.json")
 # files=("vimrc" "tmux.conf" "config/git" "config/nvim" "config/wezterm" "config/sheldon" "config/efm-langserver" "vim")
 for file in "${files[@]}"
 do

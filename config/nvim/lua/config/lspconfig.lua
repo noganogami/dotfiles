@@ -4,8 +4,10 @@ require("mason").setup()
 require("mason-lspconfig").setup({
     ensure_installed = {
         "typos_lsp",
+        "harper_ls",
         "ts_ls",
         "gopls",
+        "lua_ls",
         -- "clangd",
         "pyright",
         -- "sqls",
@@ -31,10 +33,10 @@ local common_on_attach = function(client, bufnr)
     set_buf_keymap('n', 'g[', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
     set_buf_keymap('n', 'ge', '<cmd>lua vim.diagnostic.open_float()<CR>')
 
-    if client.supports_method "textDocument/format" then
+    if client:supports_method("textDocument/format") then
         vim.cmd 'autocmd BufWritePre <buffer> lua vim.lsp.buf.format()'
     end
-    if client.supports_method "textDocument/documentHighlight" then
+    if client:supports_method("textDocument/documentHighlight") then
         vim.opt.updatetime = 1000
         vim.api.nvim_set_hl(0, "LspReferenceText", { ctermbg = 8 })
         vim.api.nvim_set_hl(0, "LspReferenceRead", { ctermbg = 8 })
@@ -49,90 +51,163 @@ end
 
 local lspconfig = require('lspconfig')
 
-local handlers = {
-    -- default handler
-    function(server_name)
-        lspconfig[server_name].setup {
-            on_attach = common_on_attach
-        }
-    end,
-    -- override for specifics
-    ["efm"] = function()
-        lspconfig.efm.setup {
-            init_options = { documentFormatting = true },
-            settings = {
-                rootMarkers = { ".git/" },
-                languages = {
-                    python = {
-                        {
-                            formatCommand = "uvx ruff check --select I --fix --quiet -",
-                            formatStdin = true,
-                        },
-                        {
-                            formatCommand = "uvx ruff format --quiet -",
-                            formatStdin = true,
-                        },
-                    },
+vim.lsp.config('*', {
+    on_attach = common_on_attach
+})
+
+
+vim.lsp.config('efm', {
+    init_options = { documentFormatting = true },
+    settings = {
+        rootMarkers = { ".git/" },
+        languages = {
+            python = {
+                {
+                    formatCommand = "uvx ruff check --select I --fix --quiet -",
+                    formatStdin = true,
+                },
+                {
+                    formatCommand = "uvx ruff format --quiet -",
+                    formatStdin = true,
                 },
             },
-        }
-    end,
-    ["pyright"] = function()
-        lspconfig.pyright.setup {
-            settings = {
-                -- pyright = {
-                -- disableOrganizeImports = true,
-                -- },
-                python = {
-                    pythonPath = '.venv/bin/python',
-                    -- formatting = {
-                    --     provider = "none",
-                    -- },
-                    -- analysis = {
-                    --     ignore = { '*' }
-                    -- },
-                },
-            },
-        }
-    end,
-    ["clangd"] = function()
-        lspconfig.clangd.setup {
-            init_options = {
-                fallbackFlags = { '-std=c++17' },
-            },
-        }
-    end,
-    ["lua_ls"] = function()
-        lspconfig.lua_ls.setup {
-            settings = {
-                Lua = {
-                    diagnostics = {
-                        globals = { "vim" }
-                    }
-                }
+        },
+    },
+})
+vim.lsp.config('pyright', {
+    settings = {
+        -- pyright = {
+        -- disableOrganizeImports = true,
+        -- },
+        python = {
+            pythonPath = '.venv/bin/python',
+            -- formatting = {
+            --     provider = "none",
+            -- },
+            -- analysis = {
+            --     ignore = { '*' }
+            -- },
+        },
+    },
+})
+vim.lsp.config('clangd', {
+    init_options = {
+        fallbackFlags = { '-std=c++17' },
+    },
+})
+vim.lsp.config('lua_ls', {
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { "vim" }
             }
         }
+    }
+})
+vim.lsp.config('sqls', {
+    on_attach = function(client, bufnr)
+        require('sqls').on_attach(client, bufnr)
+        common_on_attach(client, bufnr)
     end,
-    ["sqls"] = function()
-        lspconfig.sqls.setup {
-            on_attach = function(client, bufnr)
-                require('sqls').on_attach(client, bufnr)
-                common_on_attach(client, bufnr)
-            end,
-            settings = {
-                sqls = {
-                    connections = {
-                        {
-                            driver = 'postgresql',
-                            dataSourceName = 'host=127.0.0.1 port=5432 user=postgres password=secret dbname=postgres sslmode=disable',
-                        },
-                    },
+    settings = {
+        sqls = {
+            connections = {
+                {
+                    driver = 'postgresql',
+                    dataSourceName =
+                    'host=127.0.0.1 port=5432 user=postgres password=secret dbname=postgres sslmode=disable',
                 },
             },
-        }
-    end,
-}
-require("mason-lspconfig").setup_handlers(handlers)
+        },
+    },
+})
+
+vim.lsp.enable(require('mason-lspconfig').get_installed_servers())
+
+-- local handlers = {
+--     -- default handler
+--     function(server_name)
+--         lspconfig[server_name].setup {
+--             on_attach = common_on_attach
+--         }
+--     end,
+--     -- override for specifics
+--     ["efm"] = function()
+--         lspconfig.efm.setup {
+--             init_options = { documentFormatting = true },
+--             settings = {
+--                 rootMarkers = { ".git/" },
+--                 languages = {
+--                     python = {
+--                         {
+--                             formatCommand = "uvx ruff check --select I --fix --quiet -",
+--                             formatStdin = true,
+--                         },
+--                         {
+--                             formatCommand = "uvx ruff format --quiet -",
+--                             formatStdin = true,
+--                         },
+--                     },
+--                 },
+--             },
+--         }
+--     end,
+--     ["pyright"] = function()
+--         lspconfig.pyright.setup {
+--             settings = {
+--                 -- pyright = {
+--                 -- disableOrganizeImports = true,
+--                 -- },
+--                 python = {
+--                     pythonPath = '.venv/bin/python',
+--                     -- formatting = {
+--                     --     provider = "none",
+--                     -- },
+--                     -- analysis = {
+--                     --     ignore = { '*' }
+--                     -- },
+--                 },
+--             },
+--         }
+--     end,
+--     ["clangd"] = function()
+--         lspconfig.clangd.setup {
+--             init_options = {
+--                 fallbackFlags = { '-std=c++17' },
+--             },
+--         }
+--     end,
+--     ["lua_ls"] = function()
+--         lspconfig.lua_ls.setup {
+--             settings = {
+--                 Lua = {
+--                     diagnostics = {
+--                         globals = { "vim" }
+--                     }
+--                 }
+--             }
+--         }
+--     end,
+--     ["sqls"] = function()
+--         lspconfig.sqls.setup {
+--             on_attach = function(client, bufnr)
+--                 require('sqls').on_attach(client, bufnr)
+--                 common_on_attach(client, bufnr)
+--             end,
+--             settings = {
+--                 sqls = {
+--                     connections = {
+--                         {
+--                             driver = 'postgresql',
+--                             dataSourceName = 'host=127.0.0.1 port=5432 user=postgres password=secret dbname=postgres sslmode=disable',
+--                         },
+--                     },
+--                 },
+--             },
+--         }
+--     end,
+-- }
+-- require("mason-lspconfig").setup_handlers(handlers)
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {

@@ -100,6 +100,7 @@ lua_add = '''
 
 [[plugins]]
 repo = 'joshuavial/aider.nvim'
+depends = ['denops.vim']
 lua_add = '''
   require('aider').setup({
     auto_manage_context = true,
