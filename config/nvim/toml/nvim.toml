@@ -14,6 +14,18 @@ lua_add = '''
 '''
 
 [[plugins]]
+repo = 'JoosepAlviste/nvim-ts-context-commentstring'
+
+[[plugins]]
+repo = 'numToStr/Comment.nvim'
+lua_add = '''
+  require('Comment').setup {
+    pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+  }
+'''
+
+
+[[plugins]]
 repo = 'yorumicolors/yorumi.nvim'
 hook_add = '''
   colorscheme yorumi

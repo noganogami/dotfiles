@@ -18,8 +18,8 @@ repo = 'tpope/vim-repeat'
 [[plugins]]
 repo = 'tpope/vim-speeddating'
 
-[[plugins]]
-repo = 'tpope/vim-commentary'
+# [[plugins]]
+# repo = 'tpope/vim-commentary'
 
 [[plugins]]
 repo = 'simeji/winresizer'
