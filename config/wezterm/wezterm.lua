@@ -17,7 +17,7 @@ config.color_scheme = 'Yorumi Abyss' -- Options: Yorumi-[Mist|Abyss|Kraken|Shade
 -- config.window_background_image = wezterm.home_dir .. '/.config/wezterm/images/divergence-meter.jpg'
 -- config.window_background_opacity = 0.2
 
-config.font = wezterm.font("HackGen Console")
+config.font = wezterm.font("HackGen Console NF")
 
 config.use_ime = false
 
@@ -178,6 +178,10 @@ wezterm.on('gui-startup', function(cmd)
     local gui_window = window:gui_window();
     gui_window:perform_action(wezterm.action.ToggleFullScreen, pane)
 end)
+
+if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+  config.default_domain = 'WSL:Ubuntu'
+end
 
 -- and finally, return the configuration to wezterm
 return config
