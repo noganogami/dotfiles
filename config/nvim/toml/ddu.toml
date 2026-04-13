@@ -61,3 +61,7 @@ on_source = 'ddu.vim'
 [[plugins]]
 repo = 'Shougo/ddu-kind-word'
 on_source = 'ddu.vim'
+
+[[plugins]]
+repo = 'lambdalisue/ddu-source-gin'
+on_source = 'ddu.vim'

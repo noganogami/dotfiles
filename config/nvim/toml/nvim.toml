@@ -15,6 +15,11 @@ lua_add = '''
 
 [[plugins]]
 repo = 'JoosepAlviste/nvim-ts-context-commentstring'
+lua_add = '''
+  config = function()
+    require('aibo').setup()
+  end
+'''
 
 [[plugins]]
 repo = 'numToStr/Comment.nvim'
@@ -24,6 +29,8 @@ lua_add = '''
   }
 '''
 
+[[plugins]]
+repo = 'lambdalisue/nvim-aibo'
 
 [[plugins]]
 repo = 'yorumicolors/yorumi.nvim'
@@ -120,4 +127,41 @@ lua_add = '''
     debug = false,
     ignore_buffers = {},
   })
+'''
+
+[[plugins]]
+repo = 'lambdalisue/gin.vim'
+depends = ['denops.vim']
+hook_add = '''
+  nnoremap <Leader>gs <Cmd>GinStatus<CR>
+  nnoremap <Leader>gc <Cmd>Gin commit<CR>
+  nnoremap <Leader>ga <Cmd>Gin add .<CR>
+  nnoremap <Leader>gp <Cmd>Gin push<CR>
+  nnoremap <Leader>gl <Cmd>GinLog<CR>
+  nnoremap <Leader>gd <Cmd>GinDiff<CR>
+  nnoremap <Leader>gb <Cmd>GinBranch<CR>
+
+  " 快適な設定
+  let g:gin_proxy_apply_without_confirm = 1
+  
+  augroup my_gin_settings
+    autocmd!
+    autocmd FileType gin-status nnoremap <buffer> a <Plug>(gin-action-stage)
+    autocmd FileType gin-status nnoremap <buffer> u <Plug>(gin-action-unstage)
+    autocmd FileType gin-status nnoremap <buffer> c <Plug>(gin-action-commit)
+    autocmd FileType gin-status nnoremap <buffer> s <Plug>(gin-action-stage)
+    autocmd FileType gin-status nnoremap <buffer> . <Plug>(gin-action-choice)
+    autocmd FileType gin-status nnoremap <buffer> ? <Plug>(gin-action-help)
+    autocmd FileType gin-status,gin-diff,gin-log,gin-branch nnoremap <buffer> q <Cmd>quit<CR>
+  augroup END
+'''
+
+[[plugins]]
+repo = 'lambdalisue/guise.vim'
+depends = ['denops.vim']
+
+[[plugins]]
+repo = 'lewis6991/gitsigns.nvim'
+lua_add = '''
+  require('gitsigns').setup()
 '''
