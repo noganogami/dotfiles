@@ -4,8 +4,8 @@ import {
   ContextBuilder,
   Dpp,
   Plugin,
-} from "https://deno.land/x/dpp_vim@v0.0.9/types.ts";
-import { Denops, fn } from "https://deno.land/x/dpp_vim@v0.0.9/deps.ts";
+} from "https://deno.land/x/dpp_vim@v0.2.0/types.ts";
+import { Denops, fn } from "https://deno.land/x/dpp_vim@v0.2.0/deps.ts";
 
 export class Config extends BaseConfig {
   override async config(args: {
@@ -20,13 +20,15 @@ export class Config extends BaseConfig {
 
     const [context, options] = await args.contextBuilder.get(args.denops);
 
-    const tomlDir = await fn.expand(args.denops, "~/.config/nvim/toml") as string;
+    const configDir = await args.denops.call("stdpath", "config") as string;
+    const tomlDir = `${configDir}/toml`;
     const isNvim = await fn.has(args.denops, "nvim");
 
     const tomls = [
+      { path: `${tomlDir}/dpp.toml`, lazy: false },
       { path: `${tomlDir}/dein.toml`, lazy: false },
+      { path: `${tomlDir}/ddu.toml`, lazy: false },
       { path: `${tomlDir}/dein_lazy.toml`, lazy: true },
-      { path: `${tomlDir}/ddu.toml`, lazy: true },
     ];
 
     if (isNvim) {

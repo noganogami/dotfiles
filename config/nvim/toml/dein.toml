@@ -2,6 +2,9 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
+repo = 'vim-airline/vim-airline'
+
+[[plugins]]
 repo = 'edkolev/tmuxline.vim'
 hook_add = '''
   let g:tmuxline_theme = 'lucius'
