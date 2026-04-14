@@ -44,7 +44,13 @@ cnoremap <C-f> <Space><BS><Right>
 let mapleader = "\<Space>"
 
 autocmd! TextYankPost * :call yankukku#Yank()
-execute 'source' $"{'<sfile>'->expand()->fnamemodify(':h')}/dein.vim"
+
+let g:use_dpp = 1 " Change to 1 to use dpp.vim
+if get(g:, 'use_dpp', 0)
+  execute 'source' $"{'<sfile>'->expand()->fnamemodify(':h')}/dpp.vim"
+else
+  execute 'source' $"{'<sfile>'->expand()->fnamemodify(':h')}/dein.vim"
+endif
 
 filetype plugin indent on
 syntax enable

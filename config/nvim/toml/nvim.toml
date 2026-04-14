@@ -1,16 +1,20 @@
 [[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'
-lua_add = '''
-  require'nvim-treesitter.configs'.setup {
-    highlight = {
-      enable = true,
-      -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-      -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-      -- Using this option may slow down your editor, and you may see some duplicate highlights.
-      -- Instead of true it can also be a list of languages
-      additional_vim_regex_highlighting = false,
-    },
-  }
+lua_source = '''
+  local status, configs = pcall(require, 'nvim-treesitter.configs')
+  if status then
+    -- パーサーのパスを runtimepath に追加
+    vim.opt.runtimepath:append(vim.fn.stdpath("data") .. "/site")
+
+    configs.setup {
+      ensure_installed = { "vim", "vimdoc", "lua", "typescript", "tsx", "javascript", "toml" },
+      auto_install = true,
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+      },
+    }
+  end
 '''
 
 [[plugins]]
@@ -18,16 +22,32 @@ repo = 'JoosepAlviste/nvim-ts-context-commentstring'
 
 [[plugins]]
 repo = 'numToStr/Comment.nvim'
-lua_add = '''
-  require('Comment').setup {
-    pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
-  }
+lua_source = '''
+  local status, comment = pcall(require, 'Comment')
+  if status then
+    comment.setup {
+      pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+    }
+  end
 '''
 
+[[plugins]]
+repo = 'lambdalisue/nvim-aibo'
+lua_source = '''
+  local status, aibo = pcall(require, 'aibo')
+  if status then
+    aibo.setup()
+  end
+'''
 
 [[plugins]]
 repo = 'yorumicolors/yorumi.nvim'
 hook_add = '''
+  if has('termguicolors')
+    set termguicolors
+  endif
+'''
+hook_source = '''
   colorscheme yorumi
 '''
 
@@ -40,53 +60,105 @@ repo = 'rcarriga/nvim-notify'
 [[plugins]]
 repo = 'folke/noice.nvim'
 depends = ['nui.nvim', 'nvim-notify']
-lua_add = '''
-  require('noice').setup({
-    routes = {
-      {
-        filter = { event = "msg_showmode" },
-        view = "notify",
+on_event = 'VimEnter'
+lua_source = '''
+  local status, noice = pcall(require, 'noice')
+  if status then
+    noice.setup({
+      lsp = {
+        progress = { enabled = true, view = "mini" },
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        },
       },
-    },
-  })
+      views = {
+        popup = {
+          win_options = {
+            wrap = true,
+            linebreak = true,
+          },
+        },
+        split = {
+          enter = true,
+          win_options = {
+            wrap = true,
+            linebreak = true,
+          },
+        },
+      },
+      routes = {
+        {
+          filter = {
+            event = "msg_show",
+            any = {
+              { min_height = 5 },
+              { find = string.rep(".", 100) },
+            },
+          },
+          view = "split",
+        },
+        {
+          filter = { event = "msg_show", kind = "", find = "written" },
+          view = "mini",
+        },
+        {
+          filter = { event = "msg_showmode" },
+          skip = true,
+        },
+      },
+      presets = {
+        bottom_search = true,
+        command_palette = false,
+        long_message_to_split = true,
+        inc_rename = false,
+        lsp_doc_border = false,
+      },
+    })
+
+    -- Noice の split バッファで 'q' を有効にする
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "noice",
+      callback = function()
+        vim.keymap.set("n", "q", function()
+          vim.api.nvim_win_close(0, true)
+        end, { buffer = true, silent = true })
+      end,
+    })
+  end
 '''
 
 [[plugins]]
 repo = 'nvim-lualine/lualine.nvim'
-lua_add = '''
-  require('lualine').setup({
-    sections = {
-      lualine_a = {'mode'},
-      lualine_b = {'branch', 'diff', 'diagnostics'},
-      lualine_c = {'filename'},
-      lualine_x = {
-        'encoding',
-        'fileformat',
-        'filetype',
-        {
-          require("noice").api.status.message.get_hl,
-          cond = require("noice").api.status.message.has,
+on_event = 'VimEnter'
+lua_source = '''
+  local status, lualine = pcall(require, 'lualine')
+  if status then
+    lualine.setup({
+      sections = {
+        lualine_a = {'mode'},
+        lualine_b = {'branch', 'diff', 'diagnostics'},
+        lualine_c = {'filename'},
+        lualine_x = {
+          'encoding',
+          'fileformat',
+          'filetype',
+          {
+            function() return require("noice").api.status.message.get_hl() end,
+            cond = function() return require("noice").api.status.message.has() end,
+          },
+          {
+            function() return require("noice").api.status.command.get() end,
+            cond = function() return require("noice").api.status.command.has() end,
+            color = { fg = "#ff9e64" },
+          },
         },
-        {
-          require("noice").api.status.command.get,
-          cond = require("noice").api.status.command.has,
-          color = { fg = "#ff9e64" },
-        },
-        {
-          require("noice").api.status.mode.get,
-          cond = require("noice").api.status.mode.has,
-          color = { fg = "#ff9e64" },
-        },
-        {
-          require("noice").api.status.search.get,
-          cond = require("noice").api.status.search.has,
-          color = { fg = "#ff9e64" },
-        },
+        lualine_y = {'progress'},
+        lualine_z = {'location'}
       },
-      lualine_y = {'progress'},
-      lualine_z = {'location'}
-    },
-  })
+    })
+  end
 '''
 
 [[plugins]]
@@ -106,18 +178,49 @@ repo = 'williamboman/mason.nvim'
 
 [[plugins]]
 repo = 'williamboman/mason-lspconfig.nvim'
-lua_add = '''
-  require('config.lspconfig')
+hook_source = '''
+  lua pcall(require, 'config.lspconfig')
 '''
 
 [[plugins]]
 repo = 'joshuavial/aider.nvim'
 depends = ['denops.vim']
-lua_add = '''
-  require('aider').setup({
-    auto_manage_context = true,
-    default_bindings = true,
-    debug = false,
-    ignore_buffers = {},
-  })
+on_cmd = 'AiderOpen'
+lua_source = '''
+  local status, aider = pcall(require, 'aider')
+  if status then
+    aider.setup({
+      auto_manage_context = true,
+      default_bindings = true,
+    })
+  end
+'''
+
+[[plugins]]
+repo = 'lambdalisue/gin.vim'
+depends = ['denops.vim']
+on_cmd = ['Gin', 'GinStatus', 'GinLog', 'GinDiff', 'GinBranch']
+hook_source = 'call config#gin#init()'
+hook_add = '''
+  nnoremap <Leader>gs <Cmd>GinStatus<CR>
+  nnoremap <Leader>gc <Cmd>Gin commit<CR>
+  nnoremap <Leader>ga <Cmd>Gin add .<CR>
+  nnoremap <Leader>gp <Cmd>Gin push<CR>
+  nnoremap <Leader>gl <Cmd>GinLog<CR>
+  nnoremap <Leader>gd <Cmd>GinDiff<CR>
+  nnoremap <Leader>gb <Cmd>GinBranch<CR>
+'''
+
+[[plugins]]
+repo = 'lambdalisue/guise.vim'
+depends = ['denops.vim']
+
+[[plugins]]
+repo = 'lewis6991/gitsigns.nvim'
+on_event = 'BufRead'
+lua_source = '''
+  local status, gitsigns = pcall(require, 'gitsigns')
+  if status then
+    gitsigns.setup()
+  end
 '''
