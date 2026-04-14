@@ -19,15 +19,6 @@ set listchars=tab:>-
 set hlsearch
 set ignorecase
 set smartcase
-set autoread
-
-" 外部でファイルが変更されたら自動で読み直す
-autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
-  \ if mode() !~ '\v[cv]' && getcmdwintype() == '' | checktime | endif
-
-" 読み直されたら通知する (お好みで)
-autocmd FileChangedShellPost *
-  \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
 nnoremap [b <Cmd>bprev<CR>
 nnoremap ]b <Cmd>bnext<CR>
