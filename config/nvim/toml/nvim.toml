@@ -65,12 +65,66 @@ lua_source = '''
   local status, noice = pcall(require, 'noice')
   if status then
     noice.setup({
-      routes = {
-        {
-          filter = { event = "msg_showmode" },
-          view = "notify",
+      lsp = {
+        progress = { enabled = true, view = "mini" },
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
         },
       },
+      views = {
+        popup = {
+          win_options = {
+            wrap = true,
+            linebreak = true,
+          },
+        },
+        split = {
+          enter = true,
+          win_options = {
+            wrap = true,
+            linebreak = true,
+          },
+        },
+      },
+      routes = {
+        {
+          filter = {
+            event = "msg_show",
+            any = {
+              { min_height = 5 },
+              { find = string.rep(".", 100) },
+            },
+          },
+          view = "split",
+        },
+        {
+          filter = { event = "msg_show", kind = "", find = "written" },
+          view = "mini",
+        },
+        {
+          filter = { event = "msg_showmode" },
+          skip = true,
+        },
+      },
+      presets = {
+        bottom_search = true,
+        command_palette = false,
+        long_message_to_split = true,
+        inc_rename = false,
+        lsp_doc_border = false,
+      },
+    })
+
+    -- Noice の split バッファで 'q' を有効にする
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "noice",
+      callback = function()
+        vim.keymap.set("n", "q", function()
+          vim.api.nvim_win_close(0, true)
+        end, { buffer = true, silent = true })
+      end,
     })
   end
 '''
