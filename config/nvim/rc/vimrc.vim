@@ -46,6 +46,7 @@ let mapleader = "\<Space>"
 autocmd! TextYankPost * :call yankukku#Yank()
 
 let g:use_dpp = 1 " Change to 1 to use dpp.vim
+let g:denops#plugin#wait_timeout = 60000
 if get(g:, 'use_dpp', 0)
   execute 'source' $"{'<sfile>'->expand()->fnamemodify(':h')}/dpp.vim"
 else
