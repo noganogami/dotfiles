@@ -13,3 +13,6 @@
 	tool = nvimdiff
 [alias]
     cb = "!git rev-parse --abbrev-ref HEAD"
+[commit]
+    template = ~/.config/git/template
+
