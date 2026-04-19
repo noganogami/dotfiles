@@ -1,14 +1,14 @@
-tap "homebrew/bundle"
-tap "yuru7/tap"
+# tap "homebrew/bundle"
+# tap "yuru7/tap"
 
 # Tools
 brew "deno"
 brew "sheldon"
-brew "tmux"
+# brew "tmux"
 brew "git"
 brew "ripgrep"
-brew "fd"
-brew "fzf"
+# brew "fd"
+# brew "fzf"
 brew "just"
 
 # GUI Apps (macOS only via Brewfile)
