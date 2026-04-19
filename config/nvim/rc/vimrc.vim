@@ -47,6 +47,9 @@ autocmd! TextYankPost * :call yankukku#Yank()
 
 let g:use_dpp = 1 " Change to 1 to use dpp.vim
 let g:denops#plugin#wait_timeout = 60000
+let g:denops#server#wait_timeout = 60000
+let g:denops#debug = 0
+let g:denops_server_deno_args = ['--no-check']
 if get(g:, 'use_dpp', 0)
   execute 'source' $"{'<sfile>'->expand()->fnamemodify(':h')}/dpp.vim"
 else

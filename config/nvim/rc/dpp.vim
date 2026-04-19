@@ -65,6 +65,7 @@ autocmd User Dpp:makeStatePost call s:dpp_ready()
 " Commands
 command! DppInstall call dpp#async_ext_action('installer', 'install')
 command! DppUpdate call dpp#async_ext_action('installer', 'update')
+command! DppCache call system('deno cache ' . s:dpp_config_path)
 execute 'command! DppMakeState call dpp#make_state("' . s:dpp_dir . '", "' . s:dpp_config_path . '")'
 
 "End dpp.vim Scripts-------------------------
