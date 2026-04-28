@@ -10,6 +10,7 @@ brew "git"
 # brew "fd"
 # brew "fzf"
 brew "just"
+brew "tree-sitter-cli"
 
 # GUI Apps (macOS only via Brewfile)
 cask "wezterm"
