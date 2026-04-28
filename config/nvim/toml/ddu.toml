@@ -43,5 +43,5 @@ repo = 'Shougo/ddu-kind-file'
 [[plugins]]
 repo = 'Shougo/ddu-kind-word'
 
-[[plugins]]
-repo = 'lambdalisue/ddu-source-gin'
+# [[plugins]]
+# repo = 'lambdalisue/ddu-source-gin'
