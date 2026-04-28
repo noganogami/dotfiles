@@ -7,7 +7,7 @@ lua_source = '''
     vim.opt.runtimepath:append(vim.fn.stdpath("data") .. "/site")
 
     configs.setup {
-      ensure_installed = { "vim", "vimdoc", "lua", "typescript", "tsx", "javascript", "toml" },
+      ensure_installed = { "vim", "vimdoc", "lua", "typescript", "tsx", "javascript", "toml", "html" },
       auto_install = true,
       highlight = {
         enable = true,
@@ -19,6 +19,25 @@ lua_source = '''
 
 [[plugins]]
 repo = 'JoosepAlviste/nvim-ts-context-commentstring'
+
+[[plugins]]
+repo = 'windwp/nvim-ts-autotag'
+lua_source = '''
+  local status, autotag = pcall(require, 'nvim-ts-autotag')
+  if status then
+    autotag.setup()
+  end
+'''
+
+[[plugins]]
+repo = 'mattn/emmet-vim'
+hook_add = '''
+  let g:user_emmet_settings = {
+  \  'variables': {'lang': 'ja'},
+  \  'jsx': {'is_jsx': 1},
+  \  'tsx': {'is_tsx': 1},
+  \}
+'''
 
 [[plugins]]
 repo = 'numToStr/Comment.nvim'
