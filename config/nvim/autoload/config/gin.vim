@@ -6,7 +6,7 @@ function! config#gin#init() abort
     " status 専用設定
     autocmd FileType gin-status call s:gin_status_settings()
     " commit 専用設定
-    autocmd FileType gin-commit call s:gin_commit_settings()
+    autocmd FileType gitcommit call s:gin_commit_settings()
   augroup END
 endfunction
 
@@ -33,4 +33,5 @@ endfunction
 
 function! s:gin_commit_settings() abort
   nnoremap <buffer><silent> <leader>a <Cmd>Apply<CR>
+  nnoremap <buffer><silent> <leader>c <Cmd>Cancel<CR>
 endfunction
