@@ -1,9 +1,11 @@
-# Default task: setup and link
-setup: install-tools link
+# Default task: install and link
+sync: link (update "all")
 
 # Install/Update all tools from Brewfile
 install-tools:
     brew bundle install --file=Brewfile
+    proto install --config-mode global
+    just update-nvim
 
 # Link configuration files (idempotent and dynamic)
 link:
@@ -20,15 +22,12 @@ update-nvim:
 update name="all":
     @if [ "{{name}}" = "all" ]; then \
         just install-tools; \
+    elif [ "{{name}}" = "neovim" ]; then \
         just update-nvim; \
-        just link; \
     else \
         echo "Updating {{name}} via brew..."; \
         brew upgrade {{name}} || brew install {{name}}; \
     fi
-
-# Sync configurations only (shorthand for link)
-sync: link
 
 # Help
 help:

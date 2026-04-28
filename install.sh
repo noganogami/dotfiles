@@ -33,7 +33,7 @@ if [ "$OS" = "Darwin" ]; then
   
   # Delegate rest to just
   echo "Delegating setup to just..."
-  just setup
+  just sync
 else
   echo "Detected Linux. Basic setup..."
   mkdir -p ~/.config

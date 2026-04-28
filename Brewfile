@@ -2,11 +2,11 @@
 # tap "yuru7/tap"
 
 # Tools
-brew "deno"
+brew "proto"
 brew "sheldon"
 # brew "tmux"
 brew "git"
-brew "ripgrep"
+# brew "ripgrep"
 # brew "fd"
 # brew "fzf"
 brew "just"

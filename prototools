@@ -1,0 +1,10 @@
+node = "latest"
+pnpm = "latest"
+deno = "2.7.13"
+python = "latest"
+uv = "latest"
+go = "latest"
+terraform = "latest"
+
+[plugins.tools]
+terraform = "https://raw.githubusercontent.com/theomessin/proto-toml-plugins/master/terraform.toml"

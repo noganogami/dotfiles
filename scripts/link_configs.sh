@@ -6,6 +6,7 @@ echo "Linking configuration files..."
 # Ensure target directories exist
 mkdir -p ~/.config
 mkdir -p ~/.vim
+mkdir -p ~/.proto
 
 # 1. Link root dotfiles (individual files)
 # Add any root-level dotfiles here
@@ -22,18 +23,27 @@ done
 for path in config/*; do
   name=$(basename "$path")
   echo "Linking ~/.config/$name"
-  ln -sfF ~/dotfiles/config/"$name" ~/.config/
+
+  if [ -e ~/.config/"$name" ]; then
+    echo "Skip ~/.config/$name already exists"
+  else
+    ln -s ~/dotfiles/config/"$name" ~/.config/
+  fi
 done
 
 # 3. Neovim/Vim internal structure (compatibility)
 echo "Setting up Neovim/Vim internal links..."
-ln -sfF ~/.config/nvim/autoload ~/.vim/
-ln -sfF ~/.config/nvim/denops ~/.vim/
-ln -sfF ~/.config/nvim/rc ~/.vim/
-ln -sfF ~/.config/nvim/toml ~/.vim/
-ln -sfF ~/.config/nvim/plugin ~/.vim/ 2>/dev/null || true
+ln -sf ~/.config/nvim/autoload ~/.vim/
+ln -sf ~/.config/nvim/denops ~/.vim/
+ln -sf ~/.config/nvim/rc ~/.vim/
+ln -sf ~/.config/nvim/toml ~/.vim/
+ln -sf ~/.config/nvim/plugin ~/.vim/ 2>/dev/null || true
 
-# 4. Zsh integration for Sheldon
+# 4. link proto config
+echo "Setting up Neovim/Vim internal links..."
+ln -sf ~/dotfiles/prototools ~/.proto/.prototools
+
+# 5. Zsh integration for Sheldon
 if [ -f ~/.zshrc ]; then
   if ! grep -q "eval \"\$(sheldon source)\"" ~/.zshrc; then
     echo "Adding sheldon to .zshrc"
