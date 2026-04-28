@@ -18,6 +18,19 @@ lua_source = '''
 '''
 
 [[plugins]]
+repo = 'Wansmer/treesj'
+depends = ['nvim-treesitter']
+lua_source = '''
+  local status, treesj = pcall(require, 'treesj')
+  if status then
+    treesj.setup({
+      use_default_keymaps = false,
+    })
+    vim.keymap.set('n', '<leader>o', require('treesj').toggle)
+  end
+'''
+
+[[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter-context'
 
 [[plugins]]
