@@ -43,6 +43,9 @@ repo = 'guns/xterm-color-table.vim'
 [[plugins]]
 repo = 'andymass/vim-matchup'
 
+[[plugins]]
+repo = 'djoshea/vim-autoread'
+
 # [[plugins]]
 # repo = '4513ECHO/nvim-keycastr'
 # lua_add = '''
