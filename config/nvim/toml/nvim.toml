@@ -18,6 +18,9 @@ lua_source = '''
 '''
 
 [[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter-context'
+
+[[plugins]]
 repo = 'JoosepAlviste/nvim-ts-context-commentstring'
 
 [[plugins]]
