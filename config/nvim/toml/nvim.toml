@@ -1,16 +1,4 @@
 [[plugins]]
-repo = 'TaDaa/vimade'
-lua_source = '''
-  local status, vimade = pcall(require, 'vimade')
-  if status then
-    vimade.setup({
-      recipe = {"default", {animate = true}},
-      fadelevel = 0.6,
-    })
-  end
-'''
-
-[[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'
 lua_source = '''
   local status, configs = pcall(require, 'nvim-treesitter.configs')
