@@ -1,6 +1,9 @@
 [[plugins]]
 repo = 'vim-denops/denops.vim'
-on_source = ['gin.vim', 'mr.vim', 'ddu.vim', 'aider.nvim']
+on_source = ['md-render.vim', 'gin.vim', 'mr.vim', 'ddu.vim', 'aider.nvim']
+# hook_add = '''
+#   let g:denops#debug = 1
+# '''
 
 [[plugins]]
 repo = 'Shougo/pum.vim'

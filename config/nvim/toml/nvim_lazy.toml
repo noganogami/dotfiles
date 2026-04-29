@@ -3,7 +3,20 @@
 # on_ft = ['markdown']
 # build = 'sh -c "cd app && yarn install"'
 
+# [[plugins]]
+# repo = 'kat0h/bufpreview.vim'
+# on_ft = ['markdown']
+# build = 'deno task prepare'
+
 [[plugins]]
-repo = 'kat0h/bufpreview.vim'
+repo ='nvim-tree/nvim-web-devicons'
+on_source = ['md-render.nvim']
+
+[[plugins]]
+repo ='delphinus/budoux.lua'
+on_source = ['md-render.nvim']
+
+[[plugins]]
+repo = 'delphinus/md-render.nvim'
+depends = ['denops.vim', 'nvim-web-devicons', 'budoux.lua']
 on_ft = ['markdown']
-build = 'deno task prepare'
