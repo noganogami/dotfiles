@@ -20,3 +20,4 @@ on_source = ['md-render.nvim']
 repo = 'delphinus/md-render.nvim'
 depends = ['denops.vim', 'nvim-web-devicons', 'budoux.lua']
 on_ft = ['markdown']
+lua_source = 'vim.keymap.set("n", "<leader>p", "<Plug>(md-render-preview-tab)")'
