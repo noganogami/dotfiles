@@ -11,9 +11,9 @@ install-tools:
 link:
     ./scripts/link_configs.sh
 
-# Update Neovim nightly (macOS)
+# Update Neovim nightly for the current OS and architecture
 update-nvim:
-    ./scripts/install_nvim_nightly_macos.sh
+    ./scripts/install_nvim_nightly.sh
 
 # Update all or specific tool
 # Usage: 

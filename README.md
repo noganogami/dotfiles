@@ -47,7 +47,7 @@ cd ~/dotfiles
   - `nvim`, `wezterm`, `git`, `sheldon`, `alacritty`, `karabiner`, `efm-langserver`
 - **`scripts/`**: 管理用の補助スクリプト。
   - `link_configs.sh`: 設定ファイルのリンク処理。
-  - `install_nvim_nightly_macos.sh`: Neovim Nightly のインストール。
+  - `install_nvim_nightly.sh`: OS と CPU アーキテクチャに応じた Neovim Nightly のインストール。
 - **`justfile`**: コマンドランナー。日常的なタスクを定義。
 - **`Brewfile`**: Homebrew で管理するパッケージ一覧。
 - **`prototools`**: [proto](https://moonrepo.dev/proto) で管理するランタイム設定。
