@@ -1,4 +1,6 @@
 " dpp.vim Scripts-----------------------------
+let s:default_runtimepath = &runtimepath
+
 if &compatible
   set nocompatible
 endif
@@ -29,20 +31,18 @@ let s:dpp_config_path = expand('<sfile>:h:h') . '/dpp/config.ts'
 
 function! s:dpp_ready() abort
   " 状態ロード後または生成後に実行
-  if exists('*dpp#ext_action')
-    let l:not_installed = dpp#ext_action('installer', 'getNotInstalled')
-    if !empty(l:not_installed)
-      echomsg 'dpp: installing missing plugins...'
-      call dpp#async_ext_action('installer', 'install')
-      return
-    endif
+  let l:not_installed = dpp#sync_ext_action('installer', 'getNotInstalled')
+  if !empty(l:not_installed)
+    echomsg 'dpp: installing missing plugins...'
+    call dpp#async_ext_action('installer', 'install')
+    return
   endif
 
   " ddu 初期化の呼び出し (関数が存在すれば呼び出す)
   try
     call config#ddu#init()
     echomsg 'dpp: ddu initialized.'
-  catch /E117/
+  catch /^Vim\%((\a\+)\)\=:E117: Unknown function: config#ddu#init$/
     echomsg 'dpp: ddu is not ready yet (config#ddu#init not found).'
   catch
     echomsg 'dpp: error during ddu initialization: ' . v:exception
@@ -59,8 +59,17 @@ else
   autocmd User DenopsReady call s:dpp_ready()
 endif
 
+" dpp の state に古い Neovim のパスが保存されていても、現在実行中の
+" Neovim が起動時に設定した runtime（標準 ftplugin や parser を含む）を保つ。
+for s:path in split(s:default_runtimepath, ',')
+  if index(split(&runtimepath, ','), s:path) < 0
+    execute 'set runtimepath+=' . fnameescape(s:path)
+  endif
+endfor
+
 " 状態生成完了後の処理
 autocmd User Dpp:makeStatePost call s:dpp_ready()
+autocmd User Dpp:extActionPost:installer:install call s:dpp_ready()
 
 " Commands
 command! DppInstall call dpp#async_ext_action('installer', 'install')
