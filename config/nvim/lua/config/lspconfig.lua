@@ -8,6 +8,7 @@ require("mason-lspconfig").setup({
         "ts_ls",
         "gopls",
         "lua_ls",
+        "fsautocomplete",
         -- "clangd",
         "pyright",
         -- "sqls",
@@ -103,6 +104,21 @@ vim.lsp.config('lua_ls', {
             }
         }
     }
+})
+local function find_dotnet_root()
+    for _, line in ipairs(vim.fn.systemlist({ "dotnet", "--list-runtimes" })) do
+        local runtime_dir = line:match("%[(.-)%]")
+        if runtime_dir then
+            return vim.fs.dirname(vim.fs.dirname(runtime_dir))
+        end
+    end
+end
+
+local dotnet_root = find_dotnet_root()
+vim.lsp.config('fsautocomplete', {
+    cmd_env = dotnet_root and {
+        DOTNET_ROOT = dotnet_root,
+    } or nil,
 })
 vim.lsp.config('sqls', {
     on_attach = function(client, bufnr)
