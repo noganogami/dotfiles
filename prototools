@@ -5,6 +5,8 @@ python = "3.14.4"
 uv = "0.11.8"
 go = "1.26.2"
 terraform = "1.14.9"
+dotnet = "10.0.302"
 
 [plugins.tools]
 terraform = "https://raw.githubusercontent.com/theomessin/proto-toml-plugins/master/terraform.toml"
+dotnet = "https://raw.githubusercontent.com/RemiKalbe/proto-dotnet-plugin/main/plugin.toml"
