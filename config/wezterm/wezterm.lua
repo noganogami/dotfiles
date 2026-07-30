@@ -173,14 +173,14 @@ for i = 1, 8 do
     })
 end
 
-wezterm.on('gui-startup', function(cmd)
-    local _, pane, window = mux.spawn_window(cmd or {})
-    local gui_window = window:gui_window();
-    gui_window:perform_action(wezterm.action.ToggleFullScreen, pane)
-end)
+-- wezterm.on('gui-startup', function(cmd)
+--     local _, pane, window = mux.spawn_window(cmd or {})
+--     local gui_window = window:gui_window();
+--     gui_window:perform_action(wezterm.action.ToggleFullScreen, pane)
+-- end)
 
 if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
-  config.default_domain = 'WSL:Ubuntu'
+    config.default_domain = 'WSL:Ubuntu'
 end
 
 -- and finally, return the configuration to wezterm
