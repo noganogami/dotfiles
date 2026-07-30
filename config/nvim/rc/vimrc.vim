@@ -56,5 +56,7 @@ else
   execute 'source' $"{'<sfile>'->expand()->fnamemodify(':h')}/dein.vim"
 endif
 
+lua require('config.treesitter')
+
 filetype plugin indent on
 syntax enable
