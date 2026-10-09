@@ -1,6 +1,3 @@
-[user]
-	name = noganogami
-	email = hydetkc7@gmail.com
 [init]
 	defaultBranch = main
 [core]
@@ -16,3 +13,16 @@
 [commit]
     template = ~/.config/git/template
 
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[include]
+	path = ~/.config/git/private
+[include]
+	path = ~/.config/git-work/config
+[includeIf "hasconfig:remote.*.url:https://github.com/noganogami/**"]
+	path = ~/.config/git/private
+[includeIf "hasconfig:remote.*.url:https://*@github.com/noganogami/**"]
+	path = ~/.config/git/private
