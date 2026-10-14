@@ -57,12 +57,16 @@ export class Config extends BaseConfig {
           },
         },
       ) as {
-        plugins: Plugin[];
+        plugins?: Plugin[];
         ftplugins: Record<string, string>;
         hooks_file: string;
       } | undefined;
 
-      if (!tomlRes) continue;
+      if (!tomlRes || !Array.isArray(tomlRes.plugins)) {
+        throw new Error(
+          `Failed to load TOML plugins: ${toml.path}. Check the preceding dpp-ext-toml error.`,
+        );
+      }
 
       for (const plugin of tomlRes.plugins) {
         recordPlugins[plugin.name] = plugin;

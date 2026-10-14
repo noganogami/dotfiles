@@ -243,3 +243,32 @@ lua_source = '''
     gitsigns.setup()
   end
 '''
+
+[[plugins]]
+repo = 'nvim-orgmode/orgmode'
+lua_source = '''
+  require('orgmode').setup({
+    org_agenda_files = '~/workspace/org/**/*.org',
+    org_default_notes_file = '~/workspace/org/inbox/capture.org',
+    org_startup_folded = 'showeverything',
+  })
+
+  -- Register after the ftplugin loader so this also works on repeated FileType.
+  vim.cmd('filetype plugin on')
+  vim.api.nvim_create_autocmd('FileType', {
+    group = vim.api.nvim_create_augroup('config_orgmode', { clear = true }),
+    pattern = 'org',
+    callback = function()
+      -- dpp loads org.vim first, whose b:did_ftplugin makes org.lua skip setup.
+      if vim.bo.omnifunc == 'v:lua.orgmode.omnifunc' or vim.b.org_tmp_edit_window then
+        return
+      end
+      if vim.b.undo_ftplugin then
+        vim.cmd(vim.b.undo_ftplugin)
+      end
+      vim.b.did_ftplugin = nil
+      vim.b.undo_ftplugin = nil
+      vim.cmd('runtime! ftplugin/org.lua')
+    end,
+  })
+'''
