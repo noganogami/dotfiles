@@ -250,6 +250,20 @@ lua_source = '''
   require('orgmode').setup({
     org_agenda_files = '~/workspace/org/**/*.org',
     org_default_notes_file = '~/workspace/org/inbox/capture.org',
+    org_capture_templates = {
+      m = {
+        description = 'メモ',
+        template = '* %?\n  %u',
+        headline = 'メモ',
+        properties = { empty_lines = 1 },
+      },
+      t = {
+        description = 'やること',
+        template = '* TODO %?\n  %u',
+        headline = 'やること',
+        properties = { empty_lines = 1 },
+      },
+    },
     org_startup_folded = 'showeverything',
   })
 
