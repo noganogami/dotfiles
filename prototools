@@ -1,12 +1,15 @@
-node = "25.9.0"
+node = "26.12.1"
 pnpm = "10.33.2"
 deno = "2.7.13"
 python = "3.14.4"
-uv = "0.11.8"
+uv = "0.13.6"
 go = "1.26.2"
 terraform = "1.14.9"
 dotnet = "10.0.302"
+npm = "12.0.2"
+openjdk = "21.0.11+10"
 
 [plugins.tools]
 terraform = "https://raw.githubusercontent.com/theomessin/proto-toml-plugins/master/terraform.toml"
 dotnet = "https://raw.githubusercontent.com/RemiKalbe/proto-dotnet-plugin/main/plugin.toml"
+openjdk = "github://eplightning/openjdk-adoptium-proto-plugin@v0.2.0"
